@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".views.ConfigurationActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Configuration Screen"
-        tools:layout_editor_absoluteX="156dp"
-        tools:layout_editor_absoluteY="307dp" />
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/content_configuration" />
+</android.support.design.widget.CoordinatorLayout>

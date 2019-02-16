@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_configuration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+
+    tools:context=".views.ConfigurationActivity"
+    tools:showIn="@layout/activity_configuration">
+
+    <TextView
+        android:id="@+id/points_engineer_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/edit_engineer"
+        android:layout_alignLeft="@+id/skill_points_label"
+        android:layout_toLeftOf="@+id/edit_engineer"
+        android:text="Engineer" />
+
+    <EditText
+        android:id="@+id/edit_engineer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_trader"
+        android:layout_alignLeft="@+id/skill_points"
+        android:layout_marginTop="12dp"
+        android:ems="2"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/points_trader_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/edit_trader"
+        android:layout_alignLeft="@+id/skill_points_label"
+        android:layout_toLeftOf="@+id/edit_trader"
+        android:text="Trader" />
+
+    <EditText
+        android:id="@+id/edit_trader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_fighter"
+        android:layout_alignLeft="@+id/skill_points"
+        android:layout_marginTop="12dp"
+        android:ems="2"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/points_fighter_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/edit_fighter"
+        android:layout_alignLeft="@+id/skill_points_label"
+        android:layout_toLeftOf="@+id/edit_fighter"
+        android:text="Fighter" />
+
+    <EditText
+        android:id="@+id/edit_fighter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_pilot"
+        android:layout_alignLeft="@+id/skill_points"
+        android:layout_marginTop="12dp"
+        android:ems="2"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/points_pilot_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/edit_pilot"
+        android:layout_alignLeft="@+id/skill_points_label"
+        android:layout_toLeftOf="@+id/edit_pilot"
+        android:text="Pilot" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_commander_text"
+        android:textSize="24sp"
+        android:text="New Commander" />
+
+    <EditText
+        android:id="@+id/commander_name_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:text="Name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Difficulty"
+        android:layout_below="@id/commander_name_input"
+        android:id="@+id/difficulty_text"
+        android:layout_marginTop="38dp"
+        android:layout_alignParentStart="true"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/difficulty_spinner"
+        android:layout_below="@id/difficulty_text"
+        android:layout_marginTop="32dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/skill_points_label"
+        android:layout_below="@id/difficulty_spinner"
+        android:text="Skill Points"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:id="@+id/skill_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/difficulty_spinner"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_toRightOf="@+id/skill_points_label"
+        android:text="##" />
+
+    <EditText
+        android:id="@+id/edit_pilot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/skill_points"
+        android:layout_alignLeft="@+id/skill_points"
+        android:layout_marginTop="12dp"
+        android:ems="2"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/submit_configuration_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_engineer"
+        android:layout_marginTop="32dp"
+        android:text="OK" />
+
+</RelativeLayout>
