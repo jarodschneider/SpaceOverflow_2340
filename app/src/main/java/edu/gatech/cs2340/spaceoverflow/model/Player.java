@@ -7,6 +7,14 @@ public class Player {
     int traderSkill;
     int engineerSkill;
 
+    public Player(String name, int pilotSkill, int fighterSkill, int traderSkill, int engineerSkill) {
+        this.name = name;
+        this.pilotSkill = pilotSkill;
+        this.fighterSkill = fighterSkill;
+        this.traderSkill = traderSkill;
+        this.engineerSkill = engineerSkill;
+    }
+
     public String toString() {
         return "Player " + name + "has skill levels: Pilot(" + pilotSkill + "), " +
                 "Fighter(" + fighterSkill + "), Trader(" + traderSkill + "), and Engineer(" +
