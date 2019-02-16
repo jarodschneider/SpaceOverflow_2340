@@ -39,7 +39,7 @@ public class ConfigurationViewModel extends AndroidViewModel {
 
     public void createPlayer(String name, int pilotSkill, int fighterSkill, int traderSkill,
                              int engineerSkill) {
-        Player player = Player(name, pilotSkill, fighterSkill, traderSkill, engineerSkill);
+        Player player = new Player(name, pilotSkill, fighterSkill, traderSkill, engineerSkill);
         Log.d("INFO", "The player was created." + player.toString());
     }
 
