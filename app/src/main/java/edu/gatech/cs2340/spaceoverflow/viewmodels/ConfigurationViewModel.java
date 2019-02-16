@@ -9,4 +9,6 @@ public class ConfigurationViewModel extends AndroidViewModel {
     public ConfigurationViewModel(@NonNull Application application) {
         super(application);
     }
+
+
 }
