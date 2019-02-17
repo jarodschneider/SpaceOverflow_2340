@@ -1,6 +1,7 @@
 package edu.gatech.cs2340.spaceoverflow.views;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -56,9 +57,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         pilot = findViewById(R.id.edit_pilot);
         submitButton = findViewById(R.id.submit_configuration_button);
 
-//        fighter.addTextChangedListener(skillWatcher);
-
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
+
+        submitButton.setEnabled(false);
 
         fighter.setText("0");
         trader.setText("0");
@@ -81,13 +82,23 @@ public class ConfigurationActivity extends AppCompatActivity {
         if (viewModel.validateSkillLevels(sPilot, sFighter, sTrader, sEngineer)) {
             Log.d("Edit", "Player vals valid");
             viewModel.createPlayer(name.getText().toString(), sPilot, sFighter, sTrader, sEngineer);
-        } else {
-            Log.d("Edit", "INVALID VALS");
-            Toast.makeText(getApplicationContext(), "Skills must add up to 16.", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void computeSkills() {
+        if (pilot.getText().toString().equals("")) {
+            pilot.setText("0");
+        }
+        if (fighter.getText().toString().equals("")) {
+            fighter.setText("0");
+        }
+        if (trader.getText().toString().equals("")) {
+            trader.setText("0");
+        }
+        if (engineer.getText().toString().equals("")) {
+            engineer.setText("0");
+        }
+
         sPilot = Integer.parseInt(pilot.getText().toString());
         sFighter = Integer.parseInt(fighter.getText().toString());
         sTrader = Integer.parseInt(trader.getText().toString());
@@ -96,6 +107,13 @@ public class ConfigurationActivity extends AppCompatActivity {
         if (sPilot + sFighter + sTrader + sEngineer <= 16) {
             sPoints = 16 - (sPilot + sFighter + sTrader + sEngineer);
             skillPoints.setText(sPoints.toString());
+            if (sPoints == 0) {
+                submitButton.setEnabled(true);
+                skillPoints.setTextColor(Color.GREEN);
+            } else {
+                submitButton.setEnabled(false);
+                skillPoints.setTextColor(Color.RED);
+            }
         } else {
             Toast.makeText(getApplicationContext(), "Skills cannot sum greater than 16", Toast.LENGTH_SHORT).show();
         }
