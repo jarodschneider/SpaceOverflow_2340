@@ -1,11 +1,11 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
 public class Player {
-    String name;
-    int pilotSkill;
-    int fighterSkill;
-    int traderSkill;
-    int engineerSkill;
+    private String name;
+    private int pilotSkill;
+    private int fighterSkill;
+    private int traderSkill;
+    private int engineerSkill;
 
     public Player(String name, int pilotSkill, int fighterSkill, int traderSkill, int engineerSkill) {
         this.name = name;
@@ -16,7 +16,7 @@ public class Player {
     }
 
     public String toString() {
-        return "Player " + name + "has skill levels: Pilot(" + pilotSkill + "), " +
+        return "Player " + name + " has skill levels: Pilot(" + pilotSkill + "), " +
                 "Fighter(" + fighterSkill + "), Trader(" + traderSkill + "), and Engineer(" +
                 engineerSkill + ").";
     }

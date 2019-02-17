@@ -142,6 +142,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_engineer"
         android:layout_marginTop="32dp"
-        android:text="OK" />
+        android:onClick="onSubmitPressed"
+        android:text="Submit" />
 
 </RelativeLayout>
