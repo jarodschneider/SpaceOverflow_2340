@@ -1,8 +1,9 @@
 package edu.gatech.cs2340.spaceoverflow.views;
 
-import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -15,29 +16,37 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     private ConfigurationViewModel viewModel;
 
+    Spinner difficulty;
+    TextView name;
+    EditText fighter;
+    EditText trader;
+    EditText engineer;
+    EditText pilot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-        Spinner difficulty = (Spinner) findViewById(R.id.difficulty_spinner);
-        TextView name = (TextView) findViewById(R.id.commander_name_input);
+        difficulty = findViewById(R.id.difficulty_spinner);
+        name = findViewById(R.id.commander_name_input);
 
-        Number fighter = (Number) findViewById(R.id.fighter);
-        Number trader = (Number) findViewById(R.id.trader);
-        Number engineer = (Number) findViewById(R.id.engineer);
-        Number pilot = (Number) findViewById(R.id.pilot);
+        fighter = findViewById(R.id.edit_fighter);
+        trader = findViewById(R.id.edit_trader);
+        engineer = findViewById(R.id.edit_engineer);
+        pilot = findViewById(R.id.edit_pilot);
 
-
+        viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
     }
 
     public void submit() {
-        viewModel = new ConfigurationViewModel(this);
+        int sPilot = Integer.parseInt(pilot.getText().toString());
+        int sFighter = Integer.parseInt(pilot.getText().toString());
+        int sTrader = Integer.parseInt(pilot.getText().toString());
+        int sEngineer = Integer.parseInt(pilot.getText().toString());
 
-        if (!viewModel.validateSkillLevels(pilot.intValue(), fighter.intValue(), trader.intValue(), engineer.intValue())) {
-
-        } else {
-            viewModel.createPlayer(pilot.intValue(), fighter.intValue(), trader.intValue(), engineer.intValue());
+        if (viewModel.validateSkillLevels(sPilot, sFighter, sTrader, sEngineer)) {
+            viewModel.createPlayer(name.getText().toString(), sPilot, sFighter, sTrader, sEngineer);
         }
     }
 
