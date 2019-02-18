@@ -61,6 +61,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         submitButton.setEnabled(false);
 
+
         fighter.setText("0");
         trader.setText("0");
         engineer.setText("0");
@@ -70,6 +71,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         trader.addTextChangedListener(skillWatcher);
         engineer.addTextChangedListener(skillWatcher);
         pilot.addTextChangedListener(skillWatcher);
+
 
         computeSkills();
     }
@@ -87,22 +89,30 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     private void computeSkills() {
         if (pilot.getText().toString().equals("")) {
-            pilot.setText("0");
+            sPilot = 0;
+        } else {
+            sPilot = Integer.parseInt(pilot.getText().toString());
         }
         if (fighter.getText().toString().equals("")) {
-            fighter.setText("0");
+            sFighter = 0;
+        } else {
+            sFighter = Integer.parseInt(fighter.getText().toString());
         }
         if (trader.getText().toString().equals("")) {
-            trader.setText("0");
+            sTrader = 0;
+        } else {
+            sTrader = Integer.parseInt(trader.getText().toString());
         }
         if (engineer.getText().toString().equals("")) {
-            engineer.setText("0");
+            sEngineer = 0;
+        } else {
+            sEngineer = Integer.parseInt(engineer.getText().toString());
         }
 
-        sPilot = Integer.parseInt(pilot.getText().toString());
-        sFighter = Integer.parseInt(fighter.getText().toString());
-        sTrader = Integer.parseInt(trader.getText().toString());
-        sEngineer = Integer.parseInt(engineer.getText().toString());
+
+
+
+
 
         if (sPilot + sFighter + sTrader + sEngineer <= 16) {
             sPoints = 16 - (sPilot + sFighter + sTrader + sEngineer);
@@ -122,19 +132,19 @@ public class ConfigurationActivity extends AppCompatActivity {
     private final TextWatcher skillWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
         }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+
+
         }
 
         @Override
         public void afterTextChanged(Editable s) {
-            if (s.length() != 0) {
-                computeSkills();
-            }
+            computeSkills();
         }
+
     };
 }
