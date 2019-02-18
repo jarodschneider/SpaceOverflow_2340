@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,6 +17,9 @@ import android.text.TextWatcher;
 
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+import java.util.List;
+
 import edu.gatech.cs2340.spaceoverflow.R;
 import edu.gatech.cs2340.spaceoverflow.model.Player;
 import edu.gatech.cs2340.spaceoverflow.viewmodels.ConfigurationViewModel;
@@ -24,23 +28,21 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     private ConfigurationViewModel viewModel;
 
-    Spinner difficulty;
-    TextView name;
-    TextView skillPoints;
-    EditText fighter;
-    int sFighter;
-    EditText trader;
-    int sTrader;
-    EditText engineer;
-    int sEngineer;
-    EditText pilot;
-    int sPilot;
+    private Spinner difficulty;
+    private TextView name;
+    private TextView skillPoints;
+    private EditText fighter;
+    private int sFighter;
+    private EditText trader;
+    private int sTrader;
+    private EditText engineer;
+    private int sEngineer;
+    private EditText pilot;
+    private int sPilot;
+    private Button submitButton;
 
-    private Player player;
-
-    Button submitButton;
-
-    Integer sPoints;
+    private Integer sPoints;
+    public static List<String> difficultyLevels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,12 @@ public class ConfigurationActivity extends AppCompatActivity {
         trader.addTextChangedListener(skillWatcher);
         engineer.addTextChangedListener(skillWatcher);
         pilot.addTextChangedListener(skillWatcher);
+
+        difficultyLevels = Arrays.asList("Beginner", "Easy", "Normal", "Hard", "Impossible");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, difficultyLevels);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        difficulty.setAdapter(adapter);
 
         computeSkills();
     }

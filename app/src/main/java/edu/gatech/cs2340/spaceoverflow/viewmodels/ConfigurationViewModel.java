@@ -10,7 +10,7 @@ import edu.gatech.cs2340.spaceoverflow.model.Player;
 public class ConfigurationViewModel extends AndroidViewModel {
 
     private Player player;
-
+    private final int TOTAL_SKILL = 16;
 
 
     public ConfigurationViewModel(@NonNull Application application) {
@@ -31,7 +31,7 @@ public class ConfigurationViewModel extends AndroidViewModel {
         if (engineerSkill < 0) {
             return false;
         }
-        if ((pilotSkill + fighterSkill + traderSkill + engineerSkill) != 16) {
+        if ((pilotSkill + fighterSkill + traderSkill + engineerSkill) != TOTAL_SKILL) {
             return false;
         }
         return true;
@@ -39,7 +39,7 @@ public class ConfigurationViewModel extends AndroidViewModel {
 
     public void createPlayer(String name, int pilotSkill, int fighterSkill, int traderSkill,
                              int engineerSkill) {
-        Player player = new Player(name, pilotSkill, fighterSkill, traderSkill, engineerSkill);
+        player = new Player(name, pilotSkill, fighterSkill, traderSkill, engineerSkill);
         Log.d("INFO", "The player was created." + player.toString());
     }
 
