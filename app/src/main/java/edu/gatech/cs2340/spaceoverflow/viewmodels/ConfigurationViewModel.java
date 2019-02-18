@@ -17,29 +17,35 @@ public class ConfigurationViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public boolean validateSkillLevels(int pilotSkill, int fighterSkill, int traderSkill,
-                                       int engineerSkill) {
-        if (pilotSkill < 0) {
+    public boolean validateSkillLevels(Player player) {
+        if (player.getPilotSkill() < 0) {
             return false;
         }
-        if (fighterSkill < 0) {
+        if (player.getFighterSkill() < 0) {
             return false;
         }
-        if (traderSkill < 0) {
+        if (player.getTraderSkill()< 0) {
             return false;
         }
-        if (engineerSkill < 0) {
+        if (player.getEngineerSkill() < 0) {
             return false;
         }
-        if ((pilotSkill + fighterSkill + traderSkill + engineerSkill) != TOTAL_SKILL) {
-            return false;
-        }
-        return true;
+        return (player.getPilotSkill()
+                + player.getFighterSkill()
+                + player.getTraderSkill()
+                + player.getEngineerSkill())
+                == TOTAL_SKILL;
     }
 
-    public void createPlayer(String name, int pilotSkill, int fighterSkill, int traderSkill,
-                             int engineerSkill) {
-        player = new Player(name, pilotSkill, fighterSkill, traderSkill, engineerSkill);
+    public Integer skillsRemaining(Player player) {
+        return 16 - (player.getPilotSkill()
+                    + player.getFighterSkill()
+                    + player.getTraderSkill()
+                    + player.getEngineerSkill());
+    }
+
+    public void createPlayer(Player player) {
+        this.player = player;
         Log.i("ConfigurationViewModel", "The player was created." + player.toString());
     }
 

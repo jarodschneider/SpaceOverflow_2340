@@ -29,7 +29,7 @@ public class Player {
         this.name = name;
     }
 
-    public int getPilotSkill() {
+    public Integer getPilotSkill() {
         return pilotSkill;
     }
 
@@ -37,7 +37,7 @@ public class Player {
         this.pilotSkill = pilotSkill;
     }
 
-    public int getFighterSkill() {
+    public Integer getFighterSkill() {
         return fighterSkill;
     }
 
@@ -45,7 +45,7 @@ public class Player {
         this.fighterSkill = fighterSkill;
     }
 
-    public int getTraderSkill() {
+    public Integer getTraderSkill() {
         return traderSkill;
     }
 
@@ -53,7 +53,7 @@ public class Player {
         this.traderSkill = traderSkill;
     }
 
-    public int getEngineerSkill() {
+    public Integer getEngineerSkill() {
         return engineerSkill;
     }
 

@@ -32,16 +32,13 @@ public class ConfigurationActivity extends AppCompatActivity {
     private TextView name;
     private TextView skillPoints;
     private EditText fighter;
-    private int sFighter;
     private EditText trader;
-    private int sTrader;
     private EditText engineer;
-    private int sEngineer;
     private EditText pilot;
-    private int sPilot;
     private Button submitButton;
 
-    private Integer sPoints;
+    private Player player;
+
     public static List<String> difficultyLevels;
 
     @Override
@@ -61,12 +58,13 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
 
-        submitButton.setEnabled(false);
+        player = new Player(name.getText().toString(), 0, 0, 0,
+                0);
 
-        fighter.setText("0");
-        trader.setText("0");
-        engineer.setText("0");
-        pilot.setText("0");
+        fighter.setText(player.getFighterSkill().toString());
+        trader.setText(player.getTraderSkill().toString());
+        engineer.setText(player.getEngineerSkill().toString());
+        pilot.setText(player.getPilotSkill().toString());
 
         fighter.addTextChangedListener(skillWatcher);
         trader.addTextChangedListener(skillWatcher);
@@ -79,54 +77,52 @@ public class ConfigurationActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficulty.setAdapter(adapter);
 
-        computeSkills();
+        updateView();
     }
 
     public void onSubmitPressed(View view) {
         Log.d("Edit", "Submit commander pressed");
 
-        computeSkills();
-
-        if (viewModel.validateSkillLevels(sPilot, sFighter, sTrader, sEngineer)) {
+        if (viewModel.validateSkillLevels(player)) {
             Log.d("Edit", "Player vals valid");
-            viewModel.createPlayer(name.getText().toString(), sPilot, sFighter, sTrader, sEngineer);
+            viewModel.createPlayer(player);
         }
     }
 
-    private void computeSkills() {
+    private void updateView() {
         if (pilot.getText().toString().equals("")) {
-            sPilot = 0;
+            player.setPilotSkill(0);
         } else {
-            sPilot = Integer.parseInt(pilot.getText().toString());
+            player.setPilotSkill(Integer.parseInt(pilot.getText().toString()));
         }
         if (fighter.getText().toString().equals("")) {
-            sFighter = 0;
+            player.setFighterSkill(0);
         } else {
-            sFighter = Integer.parseInt(fighter.getText().toString());
+            player.setFighterSkill(Integer.parseInt(fighter.getText().toString()));
         }
         if (trader.getText().toString().equals("")) {
-            sTrader = 0;
+            player.setTraderSkill(0);
         } else {
-            sTrader = Integer.parseInt(trader.getText().toString());
+            player.setTraderSkill(Integer.parseInt(trader.getText().toString()));
         }
         if (engineer.getText().toString().equals("")) {
-            sEngineer = 0;
+            player.setEngineerSkill(0);
         } else {
-            sEngineer = Integer.parseInt(engineer.getText().toString());
+            player.setEngineerSkill(Integer.parseInt(engineer.getText().toString()));
         }
 
-        if (sPilot + sFighter + sTrader + sEngineer <= 16) {
-            sPoints = 16 - (sPilot + sFighter + sTrader + sEngineer);
-            skillPoints.setText(sPoints.toString());
-            if (sPoints == 0) {
-                submitButton.setEnabled(true);
-                skillPoints.setTextColor(Color.GREEN);
-            } else {
-                submitButton.setEnabled(false);
-                skillPoints.setTextColor(Color.RED);
-            }
+        skillPoints.setText(viewModel.skillsRemaining(player).toString());
+
+        if (viewModel.validateSkillLevels(player)) {
+            submitButton.setEnabled(true);
+            skillPoints.setTextColor(Color.GREEN);
         } else {
-            Toast.makeText(getApplicationContext(), "Skills cannot sum greater than 16", Toast.LENGTH_SHORT).show();
+            if (viewModel.skillsRemaining(player) < 0) {
+                Toast.makeText(getApplicationContext(), "Skills cannot sum past 16",
+                                Toast.LENGTH_SHORT).show();
+            }
+            submitButton.setEnabled(false);
+            skillPoints.setTextColor(Color.RED);
         }
     }
 
@@ -142,7 +138,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
-            computeSkills();
+            updateView();
         }
     };
 }
