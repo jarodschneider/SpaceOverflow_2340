@@ -46,7 +46,7 @@ public class ConfigurationViewModel extends AndroidViewModel {
 
     public void createPlayer(Player player) {
         this.player = player;
-        Log.i("ConfigurationViewModel", "The player was created." + player.toString());
+        Log.i("ConfigurationViewModel", "The player was created. " + player.toString());
     }
 
 }
