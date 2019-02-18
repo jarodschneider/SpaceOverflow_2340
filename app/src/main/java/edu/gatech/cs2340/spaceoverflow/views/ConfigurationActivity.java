@@ -84,6 +84,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         Log.d("Edit", "Submit commander pressed");
 
         if (viewModel.validateSkillLevels(player)) {
+            player.setName(name.getText().toString());
             Log.d("Edit", "Player vals valid");
             viewModel.createPlayer(player);
         }
