@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SpaceOverflow</string>
+    <string name="title_activity_universe_viz">universe_viz</string>
 </resources>

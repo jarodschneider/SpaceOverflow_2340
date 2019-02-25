@@ -22,7 +22,20 @@ public class Universe {
 
     @Override
     public String toString() {
-        return Arrays.deepToString(solarSystems);
+
+        StringBuilder universeSB = new StringBuilder();
+        for (SolarSystem[] system: solarSystems) {
+            for (SolarSystem system2: system) {
+                if (system2 == null) {
+                    universeSB.append("-");
+                } else {
+                    universeSB.append("X");
+                }
+            }
+            universeSB.append("\n");
+
+        }
+        return universeSB.toString();
     }
 
     public Universe(Player player) {
