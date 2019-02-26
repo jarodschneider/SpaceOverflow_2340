@@ -1,6 +1,7 @@
 package edu.gatech.cs2340.spaceoverflow.views;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -87,6 +88,9 @@ public class ConfigurationActivity extends AppCompatActivity {
             player.setName(name.getText().toString());
             Log.d("Edit", "Player vals valid");
             viewModel.createPlayer(player);
+            Intent intent = new Intent(ConfigurationActivity.this,
+                    UniverseActivity.class);
+            startActivity(intent);
         }
     }
 

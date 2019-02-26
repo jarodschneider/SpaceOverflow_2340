@@ -50,7 +50,6 @@ public class ConfigurationViewModel extends AndroidViewModel {
         universe = new Universe(player);
         String universeString = universe.toString();
         StringBuilder universeSB = new StringBuilder();
-
         largeLog("ConfigurationViewModel", universe.toString());
         Log.i("ConfigurationViewModel", "The player was created with 1000 credits and a Gnat spaceship. " + player.toString());
     }
