@@ -6,12 +6,14 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import edu.gatech.cs2340.spaceoverflow.model.Player;
+import edu.gatech.cs2340.spaceoverflow.model.SolarSystem;
+import edu.gatech.cs2340.spaceoverflow.model.Universe;
 
 public class ConfigurationViewModel extends AndroidViewModel {
 
+    private Universe universe;
     private Player player;
     private final int TOTAL_SKILL = 16;
-
 
     public ConfigurationViewModel(@NonNull Application application) {
         super(application);
@@ -46,7 +48,27 @@ public class ConfigurationViewModel extends AndroidViewModel {
 
     public void createPlayer(Player player) {
         this.player = player;
+        universe = new Universe(player);
+        largeLog("ConfigurationViewModel", universe.toString());
+
+        for (SolarSystem[] sA: universe.getSolarSystems()) {
+            for (SolarSystem s: sA) {
+                if (s != null) {
+                    Log.i("ConfigurationViewModel", s.toString());
+                }
+            }
+        }
+
         Log.i("ConfigurationViewModel", "The player was created with 1000 credits and a Gnat spaceship. " + player.toString());
+    }
+
+    public static void largeLog(String tag, String content) {
+        if (content.length() > 4000) {
+            Log.i(tag, " \n" + content.substring(0, 4000 - 61));
+            largeLog(tag, " \n" + content.substring(4000 - 61));
+        } else {
+            Log.i(tag, " \n" + content);
+        }
     }
 
 }
