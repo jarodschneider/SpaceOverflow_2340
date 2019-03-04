@@ -7,12 +7,19 @@ public class Player {
     private int traderSkill;
     private int engineerSkill;
 
+    private int credits;
+
+    private Ship ship;
+
     public Player(String name, int pilotSkill, int fighterSkill, int traderSkill, int engineerSkill) {
         this.name = name;
         this.pilotSkill = pilotSkill;
         this.fighterSkill = fighterSkill;
         this.traderSkill = traderSkill;
         this.engineerSkill = engineerSkill;
+        credits = 1000;
+
+        ship = new Ship();
     }
 
     public String toString() {
@@ -59,5 +66,13 @@ public class Player {
 
     public void setEngineerSkill(int engineerSkill) {
         this.engineerSkill = engineerSkill;
+    }
+
+    public Ship getShip() {
+        return ship;
+    }
+
+    public void setShip(Ship ship) {
+        this.ship = ship;
     }
 }

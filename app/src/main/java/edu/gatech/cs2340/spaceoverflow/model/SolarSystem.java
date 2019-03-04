@@ -9,6 +9,8 @@ public class SolarSystem {
     private TechLevel techLevel;
     private ResourceLevel resourceLevel;
 
+    private Market market;
+
     @Override
     public String toString() {
         return "SolarSystem{" +
@@ -24,6 +26,8 @@ public class SolarSystem {
         this.coords = coords;
         this.techLevel = techLevel;
         this.resourceLevel = resourceLevel;
+
+        market = new Market(this);
     }
 
     public String getName() {
@@ -48,5 +52,9 @@ public class SolarSystem {
 
     public void setResourceLevel(ResourceLevel resourceLevel) {
         this.resourceLevel = resourceLevel;
+    }
+
+    public Market getMarket() {
+        return market;
     }
 }
