@@ -54,7 +54,8 @@ public class ConfigurationViewModel extends AndroidViewModel {
         for (SolarSystem[] sA: universe.getSolarSystems()) {
             for (SolarSystem s: sA) {
                 if (s != null) {
-                    Log.i("ConfigurationViewModel", s.toString());
+                    Log.i("ConfigurationViewModel", s.getName() + " " + s.getTechLevel().getLevel() + " " + s.getMarket().getTradeGoods().toString());
+                    //Log.i("ConfigurationViewModel", s.toString());
                 }
             }
         }
