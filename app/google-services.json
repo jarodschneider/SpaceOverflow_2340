@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1053673149947",
+    "firebase_url": "https://spaceoverflow-ba928.firebaseio.com",
+    "project_id": "spaceoverflow-ba928",
+    "storage_bucket": "spaceoverflow-ba928.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053673149947:android:3a93e459165b3eb2",
+        "android_client_info": {
+          "package_name": "edu.gatech.cs2340.spaceoverflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053673149947-jpttd9egr65i280e8dcq9igmtuqcm39i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSP4rxTXSGryQvKMFAx6xnfF_mPQZLQyU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
