@@ -1,6 +1,8 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
 public class Player {
+    private static Player single_instance = new Player("", 0, 0, 0, 0);
+
     private String name;
     private int pilotSkill;
     private int fighterSkill;
@@ -11,7 +13,8 @@ public class Player {
 
     private Ship ship;
 
-    public Player(String name, int pilotSkill, int fighterSkill, int traderSkill, int engineerSkill) {
+    private Player(String name, int pilotSkill, int fighterSkill, int traderSkill, int engineerSkill) {
+
         this.name = name;
         this.pilotSkill = pilotSkill;
         this.fighterSkill = fighterSkill;
@@ -74,5 +77,9 @@ public class Player {
 
     public void setShip(Ship ship) {
         this.ship = ship;
+    }
+
+    public static Player getInstance() {
+        return single_instance;
     }
 }

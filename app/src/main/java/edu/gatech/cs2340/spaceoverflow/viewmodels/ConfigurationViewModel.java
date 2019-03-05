@@ -11,8 +11,6 @@ import edu.gatech.cs2340.spaceoverflow.model.Universe;
 
 public class ConfigurationViewModel extends AndroidViewModel {
 
-    private Universe universe;
-    private Player player;
     private final int TOTAL_SKILL = 16;
 
     public ConfigurationViewModel(@NonNull Application application) {
@@ -47,11 +45,9 @@ public class ConfigurationViewModel extends AndroidViewModel {
     }
 
     public void createPlayer(Player player) {
-        this.player = player;
-        universe = new Universe(player);
-        largeLog("ConfigurationViewModel", universe.toString());
+        largeLog("ConfigurationViewModel", Universe.getInstance().toString());
 
-        for (SolarSystem[] sA: universe.getSolarSystems()) {
+        for (SolarSystem[] sA: Universe.getInstance().getSolarSystems()) {
             for (SolarSystem s: sA) {
                 if (s != null) {
                     Log.i("ConfigurationViewModel", s.getName() + " " + s.getTechLevel().getLevel() + " " + s.getMarket().getTradeGoods().toString());

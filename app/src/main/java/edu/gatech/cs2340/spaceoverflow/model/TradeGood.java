@@ -111,4 +111,19 @@ public class TradeGood {
     public String getName() {
         return name;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof TradeGood)) {
+            return false;
+        }
+
+        TradeGood t = (TradeGood) o;
+
+        return this.name.equals(t.name);
+    }
 }

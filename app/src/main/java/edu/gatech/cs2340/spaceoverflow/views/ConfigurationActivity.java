@@ -38,8 +38,6 @@ public class ConfigurationActivity extends AppCompatActivity {
     private EditText pilot;
     private Button submitButton;
 
-    private Player player;
-
     public static List<String> difficultyLevels;
 
     @Override
@@ -59,13 +57,10 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
 
-        player = new Player(name.getText().toString(), 0, 0, 0,
-                0);
-
-        fighter.setText(player.getFighterSkill().toString());
-        trader.setText(player.getTraderSkill().toString());
-        engineer.setText(player.getEngineerSkill().toString());
-        pilot.setText(player.getPilotSkill().toString());
+        fighter.setText(Player.getInstance().getFighterSkill().toString());
+        trader.setText(Player.getInstance().getTraderSkill().toString());
+        engineer.setText(Player.getInstance().getEngineerSkill().toString());
+        pilot.setText(Player.getInstance().getPilotSkill().toString());
 
         fighter.addTextChangedListener(skillWatcher);
         trader.addTextChangedListener(skillWatcher);
@@ -84,10 +79,10 @@ public class ConfigurationActivity extends AppCompatActivity {
     public void onSubmitPressed(View view) {
         Log.d("Edit", "Submit commander pressed");
 
-        if (viewModel.validateSkillLevels(player)) {
-            player.setName(name.getText().toString());
+        if (viewModel.validateSkillLevels(Player.getInstance())) {
+            Player.getInstance().setName(name.getText().toString());
             Log.d("Edit", "Player vals valid");
-            viewModel.createPlayer(player);
+            viewModel.createPlayer(Player.getInstance());
             Intent intent = new Intent(ConfigurationActivity.this,
                     UniverseActivity.class);
             startActivity(intent);
@@ -96,33 +91,33 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     private void updateView() {
         if (pilot.getText().toString().equals("")) {
-            player.setPilotSkill(0);
+            Player.getInstance().setPilotSkill(0);
         } else {
-            player.setPilotSkill(Integer.parseInt(pilot.getText().toString()));
+            Player.getInstance().setPilotSkill(Integer.parseInt(pilot.getText().toString()));
         }
         if (fighter.getText().toString().equals("")) {
-            player.setFighterSkill(0);
+            Player.getInstance().setFighterSkill(0);
         } else {
-            player.setFighterSkill(Integer.parseInt(fighter.getText().toString()));
+            Player.getInstance().setFighterSkill(Integer.parseInt(fighter.getText().toString()));
         }
         if (trader.getText().toString().equals("")) {
-            player.setTraderSkill(0);
+            Player.getInstance().setTraderSkill(0);
         } else {
-            player.setTraderSkill(Integer.parseInt(trader.getText().toString()));
+            Player.getInstance().setTraderSkill(Integer.parseInt(trader.getText().toString()));
         }
         if (engineer.getText().toString().equals("")) {
-            player.setEngineerSkill(0);
+            Player.getInstance().setEngineerSkill(0);
         } else {
-            player.setEngineerSkill(Integer.parseInt(engineer.getText().toString()));
+            Player.getInstance().setEngineerSkill(Integer.parseInt(engineer.getText().toString()));
         }
 
-        skillPoints.setText(viewModel.skillsRemaining(player).toString());
+        skillPoints.setText(viewModel.skillsRemaining(Player.getInstance()).toString());
 
-        if (viewModel.validateSkillLevels(player)) {
+        if (viewModel.validateSkillLevels(Player.getInstance())) {
             submitButton.setEnabled(true);
             skillPoints.setTextColor(Color.GREEN);
         } else {
-            if (viewModel.skillsRemaining(player) < 0) {
+            if (viewModel.skillsRemaining(Player.getInstance()) < 0) {
                 Toast.makeText(getApplicationContext(), "Skills cannot sum past 16",
                                 Toast.LENGTH_SHORT).show();
             }

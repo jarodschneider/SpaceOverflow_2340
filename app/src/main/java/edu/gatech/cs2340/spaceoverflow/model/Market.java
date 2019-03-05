@@ -11,11 +11,7 @@ public class Market {
 
     public Market(SolarSystem solarSystem) {
         tradeGoods = new ArrayList<>();
-        TradeGood[] all = new TradeGood[TradeGood.allGoods.length];
-        for (int i = all.length - 1; i >= 0; i--) {
-            TradeGood t = TradeGood.allGoods[i];
-            all[i] = new TradeGood(t);
-        }
+        TradeGood[] all = allGoods();
 
         for (TradeGood tradeGood : all) {
             if (tradeGood.getMTLP() <= solarSystem.getTechLevel().getLevel()) {
@@ -31,5 +27,23 @@ public class Market {
 
     public List<TradeGood> getTradeGoods() {
         return tradeGoods;
+    }
+
+    public void buyGood(Ship ship, TradeGood tradeGood) {
+        ship.addGood(tradeGood);
+    }
+
+    public void sellGood(Ship ship, TradeGood tradeGood) {
+
+    }
+
+    private TradeGood[] allGoods() {
+        TradeGood[] all = new TradeGood[TradeGood.allGoods.length];
+        for (int i = all.length - 1; i >= 0; i--) {
+            TradeGood t = TradeGood.allGoods[i];
+            all[i] = new TradeGood(t);
+        }
+
+        return all;
     }
 }

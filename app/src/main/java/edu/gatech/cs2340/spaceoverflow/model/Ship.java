@@ -5,17 +5,39 @@ import java.util.List;
 
 public class Ship {
 
-    private List<TradeGood> tradeGoods;
+    private List<TradeGood> cargoHold;
+    private int capacity;
 
     public Ship() {
-        tradeGoods = new ArrayList<>();
+        cargoHold = new ArrayList<>();
+        capacity = 10;
     }
 
-    public List<TradeGood> getTradeGoods() {
-        return tradeGoods;
+    public List<TradeGood> getCargoHold() {
+        return cargoHold;
     }
 
-    public void setTradeGoods(List<TradeGood> tradeGoods) {
-        this.tradeGoods = tradeGoods;
+    public void setCargoHold(List<TradeGood> cargoHold) {
+        this.cargoHold = cargoHold;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public void addGood(TradeGood tradeGood) {
+        if (cargoHold.contains(tradeGood)) {
+            TradeGood curr = cargoHold.get(cargoHold.indexOf(tradeGood));
+            curr.setQuantity(curr.getQuantity() + 1);
+        } else {
+            TradeGood newGood = new TradeGood(tradeGood);
+            newGood.setQuantity(1);
+            cargoHold.add(newGood);
+        }
+        capacity--;
     }
 }

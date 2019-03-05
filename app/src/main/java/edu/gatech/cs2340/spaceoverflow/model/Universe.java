@@ -6,6 +6,8 @@ import java.util.Random;
 
 public class Universe {
 
+    private static Universe single_instance = null;
+
     private List<int[]> validCoords;
     private SolarSystem[][] solarSystems = new SolarSystem[150][100];
     private Player player;
@@ -40,8 +42,8 @@ public class Universe {
         return universeSB.toString();
     }
 
-    public Universe(Player player) {
-        this.player = player;
+    private Universe(Player player) {
+        this.player = Player.getInstance();
         validCoords = new ArrayList<>();
         for (String SolarSystemName : SolarSystemNames) {
             int coords[] = generateCoords();
@@ -55,6 +57,14 @@ public class Universe {
         }
     }
 
+    public static Universe getInstance() {
+        if (single_instance == null) {
+            single_instance = new Universe(Player.getInstance());
+        }
+
+        return single_instance;
+    }
+
     private int[] generateCoords() {
         Random rand = new Random();
         int x = rand.nextInt(solarSystems.length);
@@ -64,10 +74,6 @@ public class Universe {
         } else {
             return generateCoords();
         }
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public SolarSystem[][] getSolarSystems() {
