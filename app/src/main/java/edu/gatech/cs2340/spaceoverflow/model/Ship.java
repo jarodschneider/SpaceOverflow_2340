@@ -4,13 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ship {
+    public static final Ship GNAT = new Ship("Gnat", 10);
 
     private List<TradeGood> cargoHold;
     private int capacity;
+    private String name;
 
-    public Ship() {
+    private Ship(String name, int capacity) {
         cargoHold = new ArrayList<>();
-        capacity = 10;
+        this.capacity = capacity;
+        this.name = name;
+    }
+
+    public Ship(Ship ship) {
+        this(ship.name, ship.capacity);
     }
 
     public List<TradeGood> getCargoHold() {
@@ -39,5 +46,9 @@ public class Ship {
             cargoHold.add(newGood);
         }
         capacity--;
+    }
+
+    public String getName() {
+        return name;
     }
 }

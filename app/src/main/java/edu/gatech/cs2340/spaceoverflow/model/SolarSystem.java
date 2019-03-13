@@ -26,8 +26,7 @@ public class SolarSystem {
         this.coords = coords;
         this.techLevel = techLevel;
         this.resourceLevel = resourceLevel;
-
-        market = new Market(this);
+        market = null;
     }
 
     public String getName() {
@@ -52,6 +51,10 @@ public class SolarSystem {
 
     public void setResourceLevel(ResourceLevel resourceLevel) {
         this.resourceLevel = resourceLevel;
+    }
+
+    public void initializeMarket() {
+        market = new Market(this);
     }
 
     public Market getMarket() {

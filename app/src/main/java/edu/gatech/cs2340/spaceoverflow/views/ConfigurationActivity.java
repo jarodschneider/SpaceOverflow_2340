@@ -23,9 +23,12 @@ import java.util.List;
 
 import edu.gatech.cs2340.spaceoverflow.R;
 import edu.gatech.cs2340.spaceoverflow.model.Player;
+import edu.gatech.cs2340.spaceoverflow.model.Universe;
 import edu.gatech.cs2340.spaceoverflow.viewmodels.ConfigurationViewModel;
 
 public class ConfigurationActivity extends AppCompatActivity {
+
+    private Player tempPlayer;
 
     private ConfigurationViewModel viewModel;
 
@@ -57,10 +60,12 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
 
-        fighter.setText(Player.getInstance().getFighterSkill().toString());
-        trader.setText(Player.getInstance().getTraderSkill().toString());
-        engineer.setText(Player.getInstance().getEngineerSkill().toString());
-        pilot.setText(Player.getInstance().getPilotSkill().toString());
+        tempPlayer = new Player("Name", 0, 0, 0, 0);
+
+        fighter.setText(tempPlayer.getFighterSkill().toString());
+        trader.setText(tempPlayer.getTraderSkill().toString());
+        engineer.setText(tempPlayer.getEngineerSkill().toString());
+        pilot.setText(tempPlayer.getPilotSkill().toString());
 
         fighter.addTextChangedListener(skillWatcher);
         trader.addTextChangedListener(skillWatcher);
@@ -79,10 +84,10 @@ public class ConfigurationActivity extends AppCompatActivity {
     public void onSubmitPressed(View view) {
         Log.d("Edit", "Submit commander pressed");
 
-        if (viewModel.validateSkillLevels(Player.getInstance())) {
-            Player.getInstance().setName(name.getText().toString());
+        if (viewModel.validateSkillLevels(tempPlayer)) {
+            tempPlayer.setName(name.getText().toString());
             Log.d("Edit", "Player vals valid");
-            viewModel.createPlayer(Player.getInstance());
+            viewModel.createUniverse(tempPlayer);
             Intent intent = new Intent(ConfigurationActivity.this,
                     UniverseActivity.class);
             startActivity(intent);
@@ -91,33 +96,33 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     private void updateView() {
         if (pilot.getText().toString().equals("")) {
-            Player.getInstance().setPilotSkill(0);
+            tempPlayer.setPilotSkill(0);
         } else {
-            Player.getInstance().setPilotSkill(Integer.parseInt(pilot.getText().toString()));
+            tempPlayer.setPilotSkill(Integer.parseInt(pilot.getText().toString()));
         }
         if (fighter.getText().toString().equals("")) {
-            Player.getInstance().setFighterSkill(0);
+            tempPlayer.setFighterSkill(0);
         } else {
-            Player.getInstance().setFighterSkill(Integer.parseInt(fighter.getText().toString()));
+            tempPlayer.setFighterSkill(Integer.parseInt(fighter.getText().toString()));
         }
         if (trader.getText().toString().equals("")) {
-            Player.getInstance().setTraderSkill(0);
+            tempPlayer.setTraderSkill(0);
         } else {
-            Player.getInstance().setTraderSkill(Integer.parseInt(trader.getText().toString()));
+            tempPlayer.setTraderSkill(Integer.parseInt(trader.getText().toString()));
         }
         if (engineer.getText().toString().equals("")) {
-            Player.getInstance().setEngineerSkill(0);
+            tempPlayer.setEngineerSkill(0);
         } else {
-            Player.getInstance().setEngineerSkill(Integer.parseInt(engineer.getText().toString()));
+            tempPlayer.setEngineerSkill(Integer.parseInt(engineer.getText().toString()));
         }
 
-        skillPoints.setText(viewModel.skillsRemaining(Player.getInstance()).toString());
+        skillPoints.setText(viewModel.skillsRemaining(tempPlayer).toString());
 
-        if (viewModel.validateSkillLevels(Player.getInstance())) {
+        if (viewModel.validateSkillLevels(tempPlayer)) {
             submitButton.setEnabled(true);
             skillPoints.setTextColor(Color.GREEN);
         } else {
-            if (viewModel.skillsRemaining(Player.getInstance()) < 0) {
+            if (viewModel.skillsRemaining(tempPlayer) < 0) {
                 Toast.makeText(getApplicationContext(), "Skills cannot sum past 16",
                                 Toast.LENGTH_SHORT).show();
             }

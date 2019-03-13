@@ -44,13 +44,15 @@ public class ConfigurationViewModel extends AndroidViewModel {
                     + player.getEngineerSkill());
     }
 
-    public void createPlayer(Player player) {
+    public void createUniverse(Player player) {
         largeLog("ConfigurationViewModel", Universe.getInstance().toString());
+
+        Universe.createUniverse(player);
 
         for (SolarSystem[] sA: Universe.getInstance().getSolarSystems()) {
             for (SolarSystem s: sA) {
                 if (s != null) {
-                    Log.i("ConfigurationViewModel", s.getName() + " " + s.getTechLevel().getLevel() + " " + s.getMarket().getTradeGoods().toString());
+                    Log.i("ConfigurationViewModel", s.getName() + " " + s.getTechLevel().getLevel());
                     //Log.i("ConfigurationViewModel", s.toString());
                 }
             }

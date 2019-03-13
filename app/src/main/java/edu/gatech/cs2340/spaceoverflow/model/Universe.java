@@ -43,7 +43,7 @@ public class Universe {
     }
 
     private Universe(Player player) {
-        this.player = Player.getInstance();
+        this.player = player;
         validCoords = new ArrayList<>();
         for (String SolarSystemName : SolarSystemNames) {
             int coords[] = generateCoords();
@@ -59,10 +59,21 @@ public class Universe {
 
     public static Universe getInstance() {
         if (single_instance == null) {
-            single_instance = new Universe(Player.getInstance());
+            single_instance = new Universe(new Player("", 0,
+                                                               0,
+                                                                0,
+                                                              0));
         }
 
         return single_instance;
+    }
+
+    public List<int[]> getValidCoords() {
+        return validCoords;
+    }
+
+    public static void createUniverse(Player player) {
+        single_instance = new Universe(player);
     }
 
     private int[] generateCoords() {
@@ -78,5 +89,9 @@ public class Universe {
 
     public SolarSystem[][] getSolarSystems() {
         return solarSystems;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

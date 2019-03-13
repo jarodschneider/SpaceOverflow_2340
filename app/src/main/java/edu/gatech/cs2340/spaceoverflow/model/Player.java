@@ -1,7 +1,8 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
+import java.util.Random;
+
 public class Player {
-    private static Player single_instance = new Player("", 0, 0, 0, 0);
 
     private String name;
     private int pilotSkill;
@@ -10,10 +11,11 @@ public class Player {
     private int engineerSkill;
 
     private int credits;
+    private int[] coords;
 
     private Ship ship;
 
-    private Player(String name, int pilotSkill, int fighterSkill, int traderSkill, int engineerSkill) {
+    public Player(String name, int pilotSkill, int fighterSkill, int traderSkill, int engineerSkill) {
 
         this.name = name;
         this.pilotSkill = pilotSkill;
@@ -22,7 +24,7 @@ public class Player {
         this.engineerSkill = engineerSkill;
         credits = 1000;
 
-        ship = new Ship();
+        ship = new Ship(Ship.GNAT);
     }
 
     public String toString() {
@@ -79,7 +81,11 @@ public class Player {
         this.ship = ship;
     }
 
-    public static Player getInstance() {
-        return single_instance;
+    public int[] getCoords() {
+        return coords;
+    }
+
+    public void setCoords(int[] coords) {
+        this.coords = coords;
     }
 }

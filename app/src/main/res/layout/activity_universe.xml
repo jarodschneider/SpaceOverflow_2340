@@ -41,6 +41,23 @@
         android:id="@+id/planet_label"/>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ship_label"
+        android:layout_below="@id/planet_label"
+        android:text="Ship: "
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/ship_label"
+        android:layout_alignBottom="@id/ship_label"
+        android:text="SHIP"
+        android:layout_marginStart="10dp"
+        android:id="@+id/ship_text"/>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/planet_text"
@@ -52,7 +69,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/planet_label"
+        android:layout_below="@id/ship_label"
         android:layout_marginTop="30dp"
         android:id="@+id/goBuyButton"
         android:onClick="onBuyGoodsPressed"

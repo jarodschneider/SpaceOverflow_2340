@@ -21,6 +21,7 @@ public class UniverseActivity extends AppCompatActivity {
     private TextView name;
     private TextView solarSystem;
     private Button buyButton;
+    private TextView ship;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,14 @@ public class UniverseActivity extends AppCompatActivity {
         name = findViewById(R.id.name_text);
         solarSystem = findViewById(R.id.planet_text);
         buyButton = findViewById(R.id.goBuyButton);
+        ship = findViewById(R.id.ship_text);
 
         viewModel = ViewModelProviders.of(this).get(UniverseViewModel.class);
 
-        name.setText(Player.getInstance().getName());
+        name.setText(Universe.getInstance().getPlayer().getName());
+        viewModel.initializePlayerLocation();
+        solarSystem.setText(viewModel.getPlanet().getName());
+        ship.setText(Universe.getInstance().getPlayer().getShip().getName());
     }
 
     public void onBuyGoodsPressed(View view) {
