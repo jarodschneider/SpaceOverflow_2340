@@ -72,15 +72,15 @@ public class TradeGood {
         return TTP;
     }
 
-    public int getIPL() {
+    public Integer getIPL() {
         return IPL;
     }
 
-    public int getVar() {
+    public Integer getVar() {
         return var;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
@@ -88,7 +88,7 @@ public class TradeGood {
         this.quantity = quantity;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
@@ -100,7 +100,7 @@ public class TradeGood {
         return ER;
     }
 
-    public int getBasePrice() {
+    public Integer getBasePrice() {
         return basePrice;
     }
 

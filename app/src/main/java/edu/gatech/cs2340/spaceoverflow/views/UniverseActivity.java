@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +44,8 @@ public class UniverseActivity extends AppCompatActivity {
 
     public void onBuyGoodsPressed(View view) {
         Log.d("Universe", "Buy goods pressed");
+
+        Universe.getInstance().getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]][Universe.getInstance().getPlayer().getCoords()[1]].initializeMarket();
 
         Intent intent = new Intent(UniverseActivity.this, MarketActivity.class);
         startActivity(intent);
