@@ -2,6 +2,8 @@ package edu.gatech.cs2340.spaceoverflow.model;
 
 import java.util.Random;
 
+import edu.gatech.cs2340.spaceoverflow.views.GoodAdapter;
+
 public class Player {
 
     private String name;
@@ -25,6 +27,20 @@ public class Player {
         credits = 1000;
 
         ship = new Ship(Ship.GNAT);
+    }
+
+    public boolean buyGood(TradeGood tradeGood) {
+        if (tradeGood.getPrice() <= credits && tradeGood.getQuantity() > 0) {
+            if (ship.addGood(tradeGood)) {
+                credits -= tradeGood.getPrice();
+                tradeGood.setQuantity(tradeGood.getQuantity() - 1);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     public String toString() {
@@ -87,5 +103,13 @@ public class Player {
 
     public void setCoords(int[] coords) {
         this.coords = coords;
+    }
+
+    public Integer getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
     }
 }

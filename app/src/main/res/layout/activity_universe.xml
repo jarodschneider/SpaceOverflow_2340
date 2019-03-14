@@ -75,4 +75,12 @@
         android:onClick="onBuyGoodsPressed"
         android:text="BUY GOODS"/>
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/goBuyButton"
+        android:layout_marginTop="32dp"
+        tools:listitem="@layout/hold_card"
+        android:id="@+id/hold_rv"/>
+
 </RelativeLayout>

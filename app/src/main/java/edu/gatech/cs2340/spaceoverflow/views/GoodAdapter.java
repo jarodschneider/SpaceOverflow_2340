@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingFormatArgumentException;
 
 import edu.gatech.cs2340.spaceoverflow.model.TradeGood;
 import edu.gatech.cs2340.spaceoverflow.R;
@@ -30,14 +32,31 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GoodViewHolder holder, int position) {
-        TradeGood tradeGood = goodList.get(position);
+    public void onBindViewHolder(@NonNull final GoodViewHolder holder, int position) {
+        final TradeGood tradeGood = goodList.get(position);
 
         holder.item.setText(tradeGood.getName());
         holder.numAvailable.setText(tradeGood.getQuantity().toString());
         List<TradeGood> playerGoods = Universe.getInstance().getPlayer().getShip().getCargoHold();
         Integer playerQuantity = playerGoods.size() > position ? playerGoods.get(position).getQuantity() : 0;
         holder.numHave.setText(playerQuantity.toString());
+        holder.buyButton.setText(String.format("BUY (%d credits)", tradeGood.getPrice()));
+
+        final int finalPosition = position;
+
+        holder.buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Universe.getInstance().getPlayer().buyGood(tradeGood)) {
+                    holder.numAvailable.setText(tradeGood.getQuantity().toString());
+                    List<TradeGood> playerGoods = Universe.getInstance().getPlayer().getShip().getCargoHold();
+                    Integer playerQuantity = playerGoods.size() > finalPosition ? playerGoods.get(finalPosition).getQuantity() : 0;
+                    holder.numHave.setText(playerQuantity.toString());
+                } else {
+                    Toast.makeText(view.getContext(), String.format("Can't buy with %d credits and %d remaining capacity", Universe.getInstance().getPlayer().getCredits(), Universe.getInstance().getPlayer().getShip().getCapacity()), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -72,6 +91,7 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
             item = itemView.findViewById(R.id.item_name);
             numAvailable = itemView.findViewById(R.id.num_available);
             numHave = itemView.findViewById(R.id.num_have);
+            buyButton = itemView.findViewById(R.id.buy_button);
         }
     }
 }

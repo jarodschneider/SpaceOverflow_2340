@@ -20,7 +20,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="BUY"
+                android:text="BUY (### credits)"
                 android:id="@+id/buy_button"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:textColor="@color/colorPrimary" />

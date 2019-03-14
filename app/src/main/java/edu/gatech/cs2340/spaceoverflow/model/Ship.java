@@ -28,7 +28,7 @@ public class Ship {
         this.cargoHold = cargoHold;
     }
 
-    public int getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 
@@ -36,16 +36,21 @@ public class Ship {
         this.capacity = capacity;
     }
 
-    public void addGood(TradeGood tradeGood) {
-        if (cargoHold.contains(tradeGood)) {
-            TradeGood curr = cargoHold.get(cargoHold.indexOf(tradeGood));
-            curr.setQuantity(curr.getQuantity() + 1);
+    public boolean addGood(TradeGood tradeGood) {
+        if (capacity > 0) {
+            if (cargoHold.contains(tradeGood)) {
+                TradeGood curr = cargoHold.get(cargoHold.indexOf(tradeGood));
+                curr.setQuantity(curr.getQuantity() + 1);
+            } else {
+                TradeGood newGood = new TradeGood(tradeGood);
+                newGood.setQuantity(1);
+                cargoHold.add(newGood);
+            }
+            capacity--;
+            return true;
         } else {
-            TradeGood newGood = new TradeGood(tradeGood);
-            newGood.setQuantity(1);
-            cargoHold.add(newGood);
+            return false;
         }
-        capacity--;
     }
 
     public String getName() {
