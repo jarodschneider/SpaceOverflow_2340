@@ -54,26 +54,21 @@ public class Ship {
     }
 
     public boolean removeGood(TradeGood tradeGood) {
-        if (capacity > 0) {
-            List<TradeGood> market = Universe.getInstance()
-                    .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
-                    [Universe.getInstance().getPlayer().getCoords()[1]]
-                    .getMarket().getTradeGoods();
+        List<TradeGood> market = Universe.getInstance()
+                .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
+                [Universe.getInstance().getPlayer().getCoords()[1]]
+                .getMarket().getTradeGoods();
+        if (market.contains(tradeGood)) {
 
-            if (market.contains(tradeGood)) {
-
-                TradeGood curr = market.get(market.indexOf(tradeGood));
-                curr.setQuantity(curr.getQuantity() + 1);
-                cargoHold.get(cargoHold.indexOf(tradeGood))
-                        .setQuantity(cargoHold.get(cargoHold.indexOf(tradeGood)).getQuantity() - 1);
-            } else {
-                return false;
-            }
-            capacity++;
-            return true;
+            TradeGood curr = market.get(market.indexOf(tradeGood));
+            curr.setQuantity(curr.getQuantity() + 1);
+            cargoHold.get(cargoHold.indexOf(tradeGood))
+                    .setQuantity(cargoHold.get(cargoHold.indexOf(tradeGood)).getQuantity() - 1);
         } else {
             return false;
         }
+        capacity++;
+        return true;
     }
 
     public String getName() {
