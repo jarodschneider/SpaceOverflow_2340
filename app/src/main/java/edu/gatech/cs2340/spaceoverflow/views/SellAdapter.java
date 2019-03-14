@@ -10,58 +10,61 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import edu.gatech.cs2340.spaceoverflow.model.TradeGood;
 import edu.gatech.cs2340.spaceoverflow.R;
+import edu.gatech.cs2340.spaceoverflow.model.TradeGood;
 import edu.gatech.cs2340.spaceoverflow.model.Universe;
 
-public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder> {
+public class SellAdapter extends RecyclerView.Adapter<SellAdapter.SellViewHolder> {
 
-    private List<TradeGood> goodList = new ArrayList<>();
+    private List<TradeGood> goodList = Universe.getInstance()
+            .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
+            [Universe.getInstance().getPlayer().getCoords()[1]]
+            .getMarket().getTradeGoods();
 
     @NonNull
     @Override
-    public GoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public SellAdapter.SellViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.good_card, parent, false);
+                .inflate(R.layout.sell_card, parent, false);
 
-        return new GoodViewHolder(itemView);
+        return new SellViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final GoodViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final SellAdapter.SellViewHolder holder, int position) {
         final TradeGood tradeGood = goodList.get(position);
 
         holder.item.setText(tradeGood.getName());
         holder.numAvailable.setText(tradeGood.getQuantity().toString());
         List<TradeGood> playerGoods = Universe.getInstance().getPlayer().getShip().getCargoHold();
-        Integer playerQuantity = playerGoods.size() > position ? playerGoods.get(position).getQuantity() : 0;
+        Integer playerQuantity = playerGoods.size() > position ?
+                                    playerGoods.get(position).getQuantity() : 0;
+
         holder.numHave.setText(playerQuantity.toString());
-        holder.buyButton.setText(String.format("BUY (%d credits)", tradeGood.getPrice()));
+        holder.sellButton.setText(String.format("SELL (%d credits)", tradeGood.getPrice()));
 
         final int finalPosition = position;
 
-        holder.buyButton.setOnClickListener(new View.OnClickListener() {
+        holder.sellButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Universe.getInstance().getPlayer().buyGood(tradeGood)) {
+                if (Universe.getInstance().getPlayer().sellGood(tradeGood)) {
                     holder.numAvailable.setText(tradeGood.getQuantity().toString());
-
                     List<TradeGood> playerGoods = Universe.getInstance()
-                            .getPlayer().getShip().getCargoHold();
+                                                    .getPlayer().getShip().getCargoHold();
 
                     Integer playerQuantity = playerGoods.size() > finalPosition ?
                                                 playerGoods.get(finalPosition).getQuantity() : 0;
 
                     holder.numHave.setText(playerQuantity.toString());
                 } else {
-                    Toast.makeText(view.getContext(),
-                            String.format("Can't buy with %d credits and %d remaining capacity",
-                                    Universe.getInstance().getPlayer().getCredits(),
-                                    Universe.getInstance().getPlayer().getShip().getCapacity()),
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), String.format("Can't sell with %d in hold",
+                            Universe.getInstance().getPlayer().getShip()
+                                    .getCargoHold().get(Universe.getInstance().getPlayer()
+                                    .getShip().getCargoHold().indexOf(tradeGood)).getQuantity()),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -85,21 +88,21 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
         notifyDataSetChanged();
     }
 
-    class GoodViewHolder extends RecyclerView.ViewHolder {
+    class SellViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
-        private Button buyButton;
+        private Button sellButton;
         private TextView item;
         private TextView numAvailable;
         private TextView numHave;
 
-        public GoodViewHolder(@NonNull View itemView) {
+        public SellViewHolder(@NonNull View itemView) {
             super(itemView);
-            cv = itemView.findViewById(R.id.card_view);
-            buyButton = itemView.findViewById(R.id.buy_button);
-            item = itemView.findViewById(R.id.item_name);
-            numAvailable = itemView.findViewById(R.id.num_available);
-            numHave = itemView.findViewById(R.id.num_have);
-            buyButton = itemView.findViewById(R.id.buy_button);
+            cv = itemView.findViewById(R.id.sell_card_view);
+            sellButton = itemView.findViewById(R.id.sell_button);
+            item = itemView.findViewById(R.id.sell_item_name);
+            numAvailable = itemView.findViewById(R.id.num_available_sell);
+            numHave = itemView.findViewById(R.id.num_have_sell);
+            sellButton = itemView.findViewById(R.id.sell_button);
         }
     }
 }

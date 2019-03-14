@@ -1,9 +1,5 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
-import java.util.Random;
-
-import edu.gatech.cs2340.spaceoverflow.views.GoodAdapter;
-
 public class Player {
 
     private String name;
@@ -34,6 +30,19 @@ public class Player {
             if (ship.addGood(tradeGood)) {
                 credits -= tradeGood.getPrice();
                 tradeGood.setQuantity(tradeGood.getQuantity() - 1);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public boolean sellGood(TradeGood tradeGood) {
+        if (ship.getCargoHold().get(ship.getCargoHold().indexOf(tradeGood)).getQuantity() > 0) {
+            if (ship.removeGood(tradeGood)) {
+                credits += tradeGood.getPrice();
                 return true;
             } else {
                 return false;

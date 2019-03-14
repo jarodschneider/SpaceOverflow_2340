@@ -2,18 +2,48 @@ package edu.gatech.cs2340.spaceoverflow.model;
 
 
 public class TradeGood {
-    public static final TradeGood WATER = new TradeGood("Water", 30, 0, 0, 2, 3, 4, ResourceLevel.LOTSOFWATER, ResourceLevel.DESERT);
-    public static final TradeGood FURS = new TradeGood("Furs", 250, 0, 0, 0, 10, 10, ResourceLevel.RICHFAUNA, ResourceLevel.LIFELESS);
-    public static final TradeGood FOOD = new TradeGood("Food", 100, 1, 0, 1, 5, 5, ResourceLevel.RICHSOIL, ResourceLevel.POORSOIL);
-    public static final TradeGood ORE = new TradeGood("Ore", 350, 2, 2, 3, 20, 10, ResourceLevel.MINERALRICH, ResourceLevel.MINERALPOOR);
-    public static final TradeGood GAMES = new TradeGood("Games", 250, 3, 1, 6, -10, 5, ResourceLevel.ARTISTIC, null);
-    public static final TradeGood FIREARMS = new TradeGood("Firearms", 1250, 3, 1, 5, -75, 100, ResourceLevel.WARLIKE, null);
-    public static final TradeGood MEDICINE = new TradeGood("Medicine", 650, 4, 1, 6, -20, 10, ResourceLevel.LOTSOFHERBS, null);
-    public static final TradeGood MACHINES = new TradeGood("Machines", 900, 4, 3, 5, -30, 5, null, null);
-    public static final TradeGood NARCOTICS = new TradeGood("Narcotics", 3500, 5, 0, 5, -125, 150, ResourceLevel.WEIRDMUSHROOMS, null);
-    public static final TradeGood ROBOTS = new TradeGood("Robots", 5000, 6, 4, 7, -150, 100, null, null);
+    public static final TradeGood WATER = new TradeGood("Water",
+            30, 0, 0, 2, 3, 4,
+            ResourceLevel.LOTSOFWATER, ResourceLevel.DESERT);
 
-    public static final TradeGood[] allGoods = {WATER, FURS, FOOD, ORE, GAMES, FIREARMS, MEDICINE, MACHINES, NARCOTICS, ROBOTS};
+    public static final TradeGood FURS = new TradeGood("Furs",
+            250, 0, 0, 0, 10, 10,
+            ResourceLevel.RICHFAUNA, ResourceLevel.LIFELESS);
+
+    public static final TradeGood FOOD = new TradeGood("Food",
+            100, 1, 0, 1, 5, 5,
+            ResourceLevel.RICHSOIL, ResourceLevel.POORSOIL);
+
+    public static final TradeGood ORE = new TradeGood("Ore",
+            350, 2, 2, 3, 20, 10,
+            ResourceLevel.MINERALRICH, ResourceLevel.MINERALPOOR);
+
+    public static final TradeGood GAMES = new TradeGood("Games",
+            250, 3, 1, 6, -10, 5,
+            ResourceLevel.ARTISTIC, null);
+
+    public static final TradeGood FIREARMS = new TradeGood("Firearms",
+            1250, 3, 1, 5, -75, 100,
+            ResourceLevel.WARLIKE, null);
+
+    public static final TradeGood MEDICINE = new TradeGood("Medicine",
+            650, 4, 1, 6, -20, 10,
+            ResourceLevel.LOTSOFHERBS, null);
+
+    public static final TradeGood MACHINES = new TradeGood("Machines",
+            900, 4, 3, 5, -30, 5,
+            null, null);
+
+    public static final TradeGood NARCOTICS = new TradeGood("Narcotics",
+            3500, 5, 0, 5, -125, 150,
+            ResourceLevel.WEIRDMUSHROOMS, null);
+
+    public static final TradeGood ROBOTS = new TradeGood("Robots",
+            5000, 6, 4, 7, -150, 100,
+            null, null);
+
+    public static final TradeGood[] allGoods = {WATER, FURS, FOOD, ORE, GAMES, FIREARMS, MEDICINE,
+                                                MACHINES, NARCOTICS, ROBOTS};
 
     private final String name;
     private final int basePrice;
@@ -28,7 +58,9 @@ public class TradeGood {
     private int price;
     private int quantity;
 
-    private TradeGood(String name, int basePrice, int MTLP, int MTLU, int TTP, int IPL, int var, ResourceLevel CR, ResourceLevel ER) {
+    private TradeGood(String name, int basePrice, int MTLP, int MTLU, int TTP, int IPL, int var,
+                      ResourceLevel CR, ResourceLevel ER) {
+
         this.name = name;
         this.basePrice = basePrice;
         this.MTLP = MTLP;

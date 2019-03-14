@@ -1,6 +1,6 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Ship {
@@ -11,7 +11,7 @@ public class Ship {
     private String name;
 
     private Ship(String name, int capacity) {
-        cargoHold = new ArrayList<>();
+        cargoHold = Arrays.asList(TradeGood.allGoods);
         this.capacity = capacity;
         this.name = name;
     }
@@ -47,6 +47,29 @@ public class Ship {
                 cargoHold.add(newGood);
             }
             capacity--;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean removeGood(TradeGood tradeGood) {
+        if (capacity > 0) {
+            List<TradeGood> market = Universe.getInstance()
+                    .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
+                    [Universe.getInstance().getPlayer().getCoords()[1]]
+                    .getMarket().getTradeGoods();
+
+            if (market.contains(tradeGood)) {
+
+                TradeGood curr = market.get(market.indexOf(tradeGood));
+                curr.setQuantity(curr.getQuantity() + 1);
+                cargoHold.get(cargoHold.indexOf(tradeGood))
+                        .setQuantity(cargoHold.get(cargoHold.indexOf(tradeGood)).getQuantity() - 1);
+            } else {
+                return false;
+            }
+            capacity++;
             return true;
         } else {
             return false;

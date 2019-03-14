@@ -26,6 +26,74 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/skills_label"
+        android:layout_below="@id/name_label"
+        android:layout_marginTop="10dp"
+        android:text="SKILL POINTS"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pilot_points_label"
+        android:layout_below="@id/skills_label"
+        android:text="Pilot: "/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pilot_points"
+        android:layout_below="@id/skills_label"
+        android:layout_toEndOf="@id/pilot_points_label"
+        android:text="##"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fighter_points_label"
+        android:layout_below="@id/pilot_points_label"
+        android:text="Fighter: "/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fighter_points"
+        android:layout_below="@id/pilot_points_label"
+        android:layout_toEndOf="@id/fighter_points_label"
+        android:text="##"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/trader_points_label"
+        android:layout_below="@id/fighter_points_label"
+        android:text="Trader: "/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/trader_points"
+        android:layout_below="@id/fighter_points_label"
+        android:layout_toEndOf="@id/trader_points_label"
+        android:text="##"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/engineer_points_label"
+        android:layout_below="@id/trader_points_label"
+        android:text="Engineer: "/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/engineer_points"
+        android:layout_below="@id/trader_points_label"
+        android:layout_toEndOf="@id/engineer_points_label"
+        android:text="##"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toEndOf="@id/name_label"
         android:layout_alignBottom="@id/name_label"
         android:layout_marginStart="10dp"
@@ -36,7 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current planet: "
-        android:layout_below="@id/name_label"
+        android:layout_below="@id/engineer_points_label"
         android:layout_marginTop="10dp"
         android:id="@+id/planet_label"/>
 
@@ -75,12 +143,14 @@
         android:onClick="onBuyGoodsPressed"
         android:text="BUY GOODS"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/goBuyButton"
-        android:layout_marginTop="32dp"
-        tools:listitem="@layout/hold_card"
-        android:id="@+id/hold_rv"/>
+        android:layout_toEndOf="@id/goBuyButton"
+        android:layout_alignBottom="@id/goBuyButton"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/goSellButton"
+        android:onClick="onSellGoodsPressed"
+        android:text="SELL GOODS"/>
 
 </RelativeLayout>

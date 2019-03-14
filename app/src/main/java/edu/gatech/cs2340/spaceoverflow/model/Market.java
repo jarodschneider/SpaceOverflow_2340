@@ -1,7 +1,6 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -16,8 +15,10 @@ public class Market {
         for (TradeGood tradeGood : all) {
             if (tradeGood.getMTLP() <= solarSystem.getTechLevel().getLevel()) {
                 int price = tradeGood.getBasePrice()
-                        + tradeGood.getIPL() * (solarSystem.getTechLevel().getLevel() - tradeGood.getMTLP())
-                        + (tradeGood.getBasePrice() * (new Random().nextInt(tradeGood.getVar()) / 100));
+                        + tradeGood.getIPL()
+                        * (solarSystem.getTechLevel().getLevel() - tradeGood.getMTLP())
+                        + (tradeGood.getBasePrice()
+                        * (new Random().nextInt(tradeGood.getVar()) / 100));
                 tradeGood.setPrice(price);
                 tradeGood.setQuantity(new Random().nextInt(15) + 1);
                 tradeGoods.add(tradeGood);
