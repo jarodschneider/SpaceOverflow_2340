@@ -1,24 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_universe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".views.UniverseActivity">
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:text="Hello"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:text="Space Trader"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: "
+        android:layout_marginTop="24dp"
+        android:id="@+id/name_label"
+        android:layout_below="@id/title_text"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/skills_label"
+        android:layout_below="@id/name_label"
+        android:layout_marginTop="10dp"
+        android:text="SKILL POINTS"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pilot_points_label"
+        android:layout_below="@id/skills_label"
+        android:text="Pilot: "/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pilot_points"
+        android:layout_below="@id/skills_label"
+        android:layout_toEndOf="@id/pilot_points_label"
+        android:text="##"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fighter_points_label"
+        android:layout_below="@id/pilot_points_label"
+        android:text="Fighter: "/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fighter_points"
+        android:layout_below="@id/pilot_points_label"
+        android:layout_toEndOf="@id/fighter_points_label"
+        android:text="##"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/trader_points_label"
+        android:layout_below="@id/fighter_points_label"
+        android:text="Trader: "/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/trader_points"
+        android:layout_below="@id/fighter_points_label"
+        android:layout_toEndOf="@id/trader_points_label"
+        android:text="##"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/engineer_points_label"
+        android:layout_below="@id/trader_points_label"
+        android:text="Engineer: "/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/engineer_points"
+        android:layout_below="@id/trader_points_label"
+        android:layout_toEndOf="@id/engineer_points_label"
+        android:text="##"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/name_label"
+        android:layout_alignBottom="@id/name_label"
+        android:layout_marginStart="10dp"
+        android:id="@+id/name_text"
+        android:text="NAME"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current planet: "
+        android:layout_below="@id/engineer_points_label"
+        android:layout_marginTop="10dp"
+        android:id="@+id/planet_label"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ship_label"
+        android:layout_below="@id/planet_label"
+        android:text="Ship: "
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/ship_label"
+        android:layout_alignBottom="@id/ship_label"
+        android:text="SHIP"
+        android:layout_marginStart="10dp"
+        android:id="@+id/ship_text"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/planet_text"
+        android:layout_alignBottom="@id/planet_label"
+        android:layout_toEndOf="@id/planet_label"
+        android:text="PLANET"
+        android:layout_marginStart="10dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ship_label"
+        android:layout_marginTop="30dp"
+        android:id="@+id/goBuyButton"
+        android:onClick="onBuyGoodsPressed"
+        android:text="BUY GOODS"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/goBuyButton"
+        android:layout_alignBottom="@id/goBuyButton"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/goSellButton"
+        android:onClick="onSellGoodsPressed"
+        android:text="SELL GOODS"/>
+
+</RelativeLayout>

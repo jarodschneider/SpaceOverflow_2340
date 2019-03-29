@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,9 +15,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.text.TextWatcher;
-
-import org.w3c.dom.Text;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +24,8 @@ import edu.gatech.cs2340.spaceoverflow.model.Player;
 import edu.gatech.cs2340.spaceoverflow.viewmodels.ConfigurationViewModel;
 
 public class ConfigurationActivity extends AppCompatActivity {
+
+    private Player tempPlayer;
 
     private ConfigurationViewModel viewModel;
 
@@ -37,8 +37,6 @@ public class ConfigurationActivity extends AppCompatActivity {
     private EditText engineer;
     private EditText pilot;
     private Button submitButton;
-
-    private Player player;
 
     public static List<String> difficultyLevels;
 
@@ -59,13 +57,12 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
 
-        player = new Player(name.getText().toString(), 0, 0, 0,
-                0);
+        tempPlayer = new Player("Name", 0, 0, 0, 0);
 
-        fighter.setText(player.getFighterSkill().toString());
-        trader.setText(player.getTraderSkill().toString());
-        engineer.setText(player.getEngineerSkill().toString());
-        pilot.setText(player.getPilotSkill().toString());
+        fighter.setText(tempPlayer.getFighterSkill().toString());
+        trader.setText(tempPlayer.getTraderSkill().toString());
+        engineer.setText(tempPlayer.getEngineerSkill().toString());
+        pilot.setText(tempPlayer.getPilotSkill().toString());
 
         fighter.addTextChangedListener(skillWatcher);
         trader.addTextChangedListener(skillWatcher);
@@ -84,10 +81,10 @@ public class ConfigurationActivity extends AppCompatActivity {
     public void onSubmitPressed(View view) {
         Log.d("Edit", "Submit commander pressed");
 
-        if (viewModel.validateSkillLevels(player)) {
-            player.setName(name.getText().toString());
+        if (viewModel.validateSkillLevels(tempPlayer)) {
+            tempPlayer.setName(name.getText().toString());
             Log.d("Edit", "Player vals valid");
-            viewModel.createPlayer(player);
+            viewModel.createUniverse(tempPlayer);
             Intent intent = new Intent(ConfigurationActivity.this,
                     UniverseActivity.class);
             startActivity(intent);
@@ -96,33 +93,33 @@ public class ConfigurationActivity extends AppCompatActivity {
 
     private void updateView() {
         if (pilot.getText().toString().equals("")) {
-            player.setPilotSkill(0);
+            tempPlayer.setPilotSkill(0);
         } else {
-            player.setPilotSkill(Integer.parseInt(pilot.getText().toString()));
+            tempPlayer.setPilotSkill(Integer.parseInt(pilot.getText().toString()));
         }
         if (fighter.getText().toString().equals("")) {
-            player.setFighterSkill(0);
+            tempPlayer.setFighterSkill(0);
         } else {
-            player.setFighterSkill(Integer.parseInt(fighter.getText().toString()));
+            tempPlayer.setFighterSkill(Integer.parseInt(fighter.getText().toString()));
         }
         if (trader.getText().toString().equals("")) {
-            player.setTraderSkill(0);
+            tempPlayer.setTraderSkill(0);
         } else {
-            player.setTraderSkill(Integer.parseInt(trader.getText().toString()));
+            tempPlayer.setTraderSkill(Integer.parseInt(trader.getText().toString()));
         }
         if (engineer.getText().toString().equals("")) {
-            player.setEngineerSkill(0);
+            tempPlayer.setEngineerSkill(0);
         } else {
-            player.setEngineerSkill(Integer.parseInt(engineer.getText().toString()));
+            tempPlayer.setEngineerSkill(Integer.parseInt(engineer.getText().toString()));
         }
 
-        skillPoints.setText(viewModel.skillsRemaining(player).toString());
+        skillPoints.setText(viewModel.skillsRemaining(tempPlayer).toString());
 
-        if (viewModel.validateSkillLevels(player)) {
+        if (viewModel.validateSkillLevels(tempPlayer)) {
             submitButton.setEnabled(true);
             skillPoints.setTextColor(Color.GREEN);
         } else {
-            if (viewModel.skillsRemaining(player) < 0) {
+            if (viewModel.skillsRemaining(tempPlayer) < 0) {
                 Toast.makeText(getApplicationContext(), "Skills cannot sum past 16",
                                 Toast.LENGTH_SHORT).show();
             }

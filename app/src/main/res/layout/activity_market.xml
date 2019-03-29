@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/activity_market"
+    android:padding="20dp"
+    tools:context=".views.MarketActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NAME"
+        android:id="@+id/market_name"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Buying Market"
+        android:textSize="20sp"
+        android:layout_toEndOf="@id/market_name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Credits: "
+        android:layout_below="@id/market_name"
+        android:id="@+id/credits_label"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#####"
+        android:id="@+id/credits"
+        android:layout_alignBottom="@id/credits_label"
+        android:layout_toEndOf="@id/credits_label"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remaining Capacity: "
+        android:id="@+id/capacity_label"
+        android:layout_below="@id/credits_label"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="##"
+        android:id="@+id/capacity"
+        android:layout_alignBottom="@id/capacity_label"
+        android:layout_toEndOf="@id/capacity_label"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@id/capacity_label"
+        android:layout_marginTop="20dp"
+        tools:listitem="@layout/good_card"
+        android:id="@+id/trades_rv" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BACK"
+        android:id="@+id/back_from_buying_button"
+        android:onClick="onBackPressed"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DO BOOKS"
+        android:onClick="onBooksPressed"
+        android:layout_alignParentEnd="true"/>
+
+
+</RelativeLayout>

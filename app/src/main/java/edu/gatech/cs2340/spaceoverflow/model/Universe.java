@@ -1,10 +1,14 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Universe {
 
+    private static Universe single_instance = null;
+
+    private List<int[]> validCoords;
     private SolarSystem[][] solarSystems = new SolarSystem[150][100];
     private Player player;
 
@@ -38,8 +42,9 @@ public class Universe {
         return universeSB.toString();
     }
 
-    public Universe(Player player) {
+    private Universe(Player player) {
         this.player = player;
+        validCoords = new ArrayList<>();
         for (String SolarSystemName : SolarSystemNames) {
             int coords[] = generateCoords();
             SolarSystem s = new SolarSystem(
@@ -48,7 +53,27 @@ public class Universe {
                     TechLevel.values()[new Random().nextInt(8)],
                     ResourceLevel.values()[new Random().nextInt(13)]);
             solarSystems[coords[0]][coords[1]] = s;
+            validCoords.add(coords);
         }
+    }
+
+    public static Universe getInstance() {
+        if (single_instance == null) {
+            single_instance = new Universe(new Player("", 0,
+                                                               0,
+                                                                0,
+                                                              0));
+        }
+
+        return single_instance;
+    }
+
+    public List<int[]> getValidCoords() {
+        return validCoords;
+    }
+
+    public static void createUniverse(Player player) {
+        single_instance = new Universe(player);
     }
 
     private int[] generateCoords() {
@@ -62,11 +87,11 @@ public class Universe {
         }
     }
 
-    public Player getPlayer() {
-        return player;
-    }
-
     public SolarSystem[][] getSolarSystems() {
         return solarSystems;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }
