@@ -93,28 +93,8 @@ public class TravelActivity extends AppCompatActivity {
 
 
     public void onWarp(View view) {
-        //String name, int[] coords, TechLevel techLevel, ResourceLevel resourceLevel
-     //   SolarSystem systems[][] = Universe.getInstance().getSolarSystems();
         String nameCurrent = solarArray[solarSystems.getSelectedItemPosition()];
-//        Log.d("DEV", String.valueOf(solarArray.length));
-//        if (solarSystems.getSelectedItemPosition() >= 0 && solarSystems.getSelectedItemPosition() < solarArray.length) {
-//            for (SolarSystem[] system: systems) {
-//                for (SolarSystem system2: system) {
-//                    if (system != null) {
-////                        String name = system2.getName();
-////
-////                        if (name.equals(nameCurrent)) {
-////                            Log.d("DEV", "FOUND PLANET ***");
-////                            Log.d("DEV", solarArray[solarSystems.getSelectedItemPosition()]);
-////                            //Universe.getInstance().getPlayer().getShip().travelTo(system2);
-////                            finish();
-////                        }
-//                    }
-//
-//                }
-//            }
-//        }
-        //can someone do this? Find the coordinates for the planet selected to warp to
+
         List<SolarSystem> solarSystems = Universe.getInstance().getSolarSystemsAsList();
         SolarSystem newSystem = solarSystems.get(solarSystems.indexOf(new SolarSystem(nameCurrent, null, null, null)));
         SolarSystem oldSystem = Universe.getInstance()
