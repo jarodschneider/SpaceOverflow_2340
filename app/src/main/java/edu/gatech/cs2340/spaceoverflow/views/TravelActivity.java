@@ -75,7 +75,7 @@ public class TravelActivity extends AppCompatActivity {
 //                }
 //            }
 //        }
-        //can someone do this?
+        //can someone do this? Find the coordinates for the planet selected to warp to
         int coords[] = new int[2];
         coords[0] = 0;
         coords[1] = 0;
