@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,10 +79,23 @@ public class TravelActivity extends AppCompatActivity {
         //can someone do this? Find the coordinates for the planet selected to warp to
         List<SolarSystem> solarSystems = Universe.getInstance().getSolarSystemsAsList();
         SolarSystem newSystem = solarSystems.get(solarSystems.indexOf(new SolarSystem(nameCurrent, null, null, null)));
-
-        Universe.getInstance().getPlayer().getShip().travelTo(newSystem);
-        //make toast
-        finish();
-
+        SolarSystem oldSystem = Universe.getInstance()
+                .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
+                [Universe.getInstance().getPlayer().getCoords()[1]];
+        if (!newSystem.equals(oldSystem)) {
+            if (!Universe.getInstance().getPlayer().getShip().travelTo(newSystem)) {
+                int fuelNeeded = newSystem.distanceFrom(oldSystem.getCoords());
+                Toast.makeText(this,
+                        String.format("Cannot travel to %s with %d fuel (%d fuel required)",
+                                newSystem.getName(), Universe.getInstance().getPlayer().getShip().getFuel(),
+                                fuelNeeded),
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                finish();
+            }
+        } else {
+            Toast.makeText(this, "Must select different System than current to travel",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }
