@@ -10,7 +10,7 @@ public class Player {
 
     private int credits;
     private int[] coords;
-
+    private SolarSystem currentSystem;
     private Ship ship;
 
     public Player(String name, int pilotSkill, int fighterSkill, int traderSkill, int engineerSkill) {
@@ -56,6 +56,10 @@ public class Player {
         return "Player " + name + " has skill levels: Pilot(" + pilotSkill + "), " +
                 "Fighter(" + fighterSkill + "), Trader(" + traderSkill + "), and Engineer(" +
                 engineerSkill + ").";
+    }
+
+    public void setCurrentSystem(SolarSystem newSystem) {
+        currentSystem = newSystem;
     }
 
     public String getName() {

@@ -71,6 +71,12 @@ public class Ship {
         return true;
     }
 
+    public boolean travelTo(SolarSystem planet) {
+        Universe.getInstance().getPlayer().setCurrentSystem(planet);
+        return true;
+    }
+
+
     public String getName() {
         return name;
     }

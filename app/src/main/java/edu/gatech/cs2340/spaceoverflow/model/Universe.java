@@ -87,6 +87,7 @@ public class Universe {
         }
     }
 
+
     public SolarSystem[][] getSolarSystems() {
         return solarSystems;
     }
@@ -94,4 +95,6 @@ public class Universe {
     public Player getPlayer() {
         return player;
     }
+
+    public String[] getSolarSystemNames() { return SolarSystemNames; }
 }

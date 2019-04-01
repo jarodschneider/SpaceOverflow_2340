@@ -54,6 +54,12 @@ public class UniverseActivity extends AppCompatActivity {
         ship.setText(Universe.getInstance().getPlayer().getShip().getName());
     }
 
+    public void onResume(View view) {
+        solarSystem.setText(viewModel.getPlanet().getName());
+
+    }
+
+
     public void onBuyGoodsPressed(View view) {
         Log.d("Universe", "Buy goods pressed");
 
@@ -73,4 +79,14 @@ public class UniverseActivity extends AppCompatActivity {
         Intent intent = new Intent(UniverseActivity.this, SellActivity.class);
         startActivity(intent);
     }
+
+    public void onTravelPressed(View view) {
+        /*Universe.getInstance().getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
+                [Universe.getInstance().getPlayer().getCoords()[1]]
+                .initializeMarket();*/
+
+        Intent intent = new Intent(UniverseActivity.this, TravelActivity.class);
+        startActivity(intent);
+    }
+
 }

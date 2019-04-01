@@ -144,13 +144,24 @@
         android:text="BUY GOODS"/>
 
     <Button
+        android:id="@+id/goSellButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/goBuyButton"
+        android:layout_alignBottom="@+id/goSellButton"
+        android:layout_alignParentEnd="false"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/goSellButton"
+        android:onClick="onTravelPressed"
+        android:text="TRAVEL" />
+
+    <Button
+        android:id="@+id/goSellButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignBottom="@id/goBuyButton"
         android:layout_marginLeft="10dp"
-        android:id="@+id/goSellButton"
+        android:layout_toEndOf="@id/goBuyButton"
         android:onClick="onSellGoodsPressed"
-        android:text="SELL GOODS"/>
+        android:text="SELL GOODS" />
 
 </RelativeLayout>
