@@ -76,14 +76,10 @@ public class TravelActivity extends AppCompatActivity {
 //            }
 //        }
         //can someone do this? Find the coordinates for the planet selected to warp to
-        int coords[] = new int[2];
-        coords[0] = 0;
-        coords[1] = 0;
-        //
+        List<SolarSystem> solarSystems = Universe.getInstance().getSolarSystemsAsList();
+        SolarSystem newSystem = solarSystems.get(solarSystems.indexOf(new SolarSystem(nameCurrent, null, null, null)));
 
-        Universe.getInstance().getPlayer().getShip().travelTo(new SolarSystem(nameCurrent, coords,
-                TechLevel.values()[new Random().nextInt(8)],
-                ResourceLevel.values()[new Random().nextInt(13)]));
+        Universe.getInstance().getPlayer().getShip().travelTo(newSystem);
         //make toast
         finish();
 

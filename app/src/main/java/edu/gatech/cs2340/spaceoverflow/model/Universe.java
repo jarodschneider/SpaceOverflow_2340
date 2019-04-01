@@ -1,8 +1,10 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Universe {
 
@@ -87,6 +89,14 @@ public class Universe {
         }
     }
 
+
+    public List<SolarSystem> getSolarSystemsAsList() {
+        List<SolarSystem> list = new ArrayList<>();
+        for (SolarSystem[] arr : solarSystems) {
+            list.addAll(Arrays.asList(arr));
+        }
+        return list;
+    }
 
     public SolarSystem[][] getSolarSystems() {
         return solarSystems;

@@ -29,6 +29,15 @@ public class SolarSystem {
         market = null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof SolarSystem)) {
+            return false;
+        }
+        SolarSystem other = (SolarSystem) o;
+        return other.getName().equals(this.name);
+    }
+
     public String getName() {
         return name;
     }

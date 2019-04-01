@@ -60,6 +60,8 @@ public class Player {
 
     public void setCurrentSystem(SolarSystem newSystem) {
         currentSystem = newSystem;
+        coords = currentSystem.getCoords();
+        currentSystem.initializeMarket();
     }
 
     public String getName() {

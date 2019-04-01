@@ -17,8 +17,8 @@ public class Market {
                 int price = tradeGood.getBasePrice()
                         + tradeGood.getIPL()
                         * (solarSystem.getTechLevel().getLevel() - tradeGood.getMTLP())
-                        + (tradeGood.getBasePrice()
-                        * (new Random().nextInt(tradeGood.getVar()) / 100));
+                        + (int)(tradeGood.getBasePrice()
+                        * ((double) new Random().nextInt(tradeGood.getVar()) / 100));
                 tradeGood.setPrice(price);
                 tradeGood.setQuantity(new Random().nextInt(15) + 1);
                 tradeGoods.add(tradeGood);
