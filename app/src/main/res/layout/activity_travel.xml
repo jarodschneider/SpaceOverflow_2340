@@ -24,12 +24,42 @@
         android:layout_below="@id/solar_spinner"/>
 
     <TextView
+        android:id="@+id/currentFuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="###"
+        android:layout_toEndOf="@id/textView3"
+        android:layout_marginStart="10dp"
+        android:layout_alignBottom="@id/textView3" />
+
+    <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Tech Level:"
         android:layout_below="@id/textView3" />
+
+    <TextView
+        android:id="@+id/new_tech_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="10dp"
+        android:text="LEVEL"
+        android:layout_alignBottom="@id/textView6"
+        android:layout_toEndOf="@id/textView6" />
+
+    <TextView
+        android:id="@+id/new_resource_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="10dp"
+        android:text="LEVEL"
+        android:layout_alignBottom="@id/textView7"
+        android:layout_toEndOf="@id/textView7" />
 
     <TextView
         android:id="@+id/textView5"
@@ -46,6 +76,16 @@
         android:layout_marginTop="8dp"
         android:text="Distance:"
         android:layout_below="@id/textView7" />
+
+    <TextView
+        android:id="@+id/new_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="###"
+        android:layout_toEndOf="@id/textView4"
+        android:layout_marginStart="10dp"
+        android:layout_alignBottom="@id/textView4" />
 
     <TextView
         android:id="@+id/textView7"

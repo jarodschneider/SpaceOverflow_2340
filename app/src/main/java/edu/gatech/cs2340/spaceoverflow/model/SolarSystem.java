@@ -66,7 +66,7 @@ public class SolarSystem {
         market = new Market(this);
     }
 
-    public int distanceFrom(int[] coords) {
+    public Integer distanceFrom(int[] coords) {
         return (int) Math.sqrt(
                 Math.pow(coords[0] - this.coords[0], 2) + Math.pow(coords[1] - this.coords[1], 2));
     }

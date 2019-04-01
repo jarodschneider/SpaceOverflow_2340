@@ -92,7 +92,7 @@ public class Ship {
         fuel -= burned;
     }
 
-    public int getFuel() {
+    public Integer getFuel() {
         return fuel;
     }
 }

@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -34,8 +35,13 @@ public class TravelActivity extends AppCompatActivity {
 
 
     private Spinner solarSystems;
+    private TextView currentFuel;
+    private TextView newTechLevel;
+    private TextView newResourceLevel;
+    private TextView distance;
 
     private String solarArray[] = Universe.getInstance().getSolarSystemNames();
+    private SolarSystem viewedSystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,10 @@ public class TravelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_travel);
 
         solarSystems = findViewById(R.id.solar_spinner);
+        currentFuel = findViewById(R.id.currentFuel);
+        newTechLevel = findViewById(R.id.new_tech_level);
+        newResourceLevel = findViewById(R.id.new_resource_level);
+        distance = findViewById(R.id.new_distance);
 
 
 
@@ -51,6 +61,34 @@ public class TravelActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         solarSystems.setAdapter(adapter);
 
+        solarSystems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                viewedSystem = Universe.getInstance().getSolarSystemsAsList()
+                        .get(Universe.getInstance().getSolarSystemsAsList()
+                                .indexOf(new SolarSystem(solarArray[solarSystems.getSelectedItemPosition()],
+                                        null, null, null)));
+
+                newTechLevel.setText(viewedSystem.getTechLevel().toString());
+                newResourceLevel.setText(viewedSystem.getResourceLevel().toString());
+                distance.setText(viewedSystem.distanceFrom(Universe.getInstance().getPlayer().getCoords()).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        currentFuel.setText(Universe.getInstance().getPlayer().getShip().getFuel().toString());
+        viewedSystem = Universe.getInstance().getSolarSystemsAsList()
+                .get(Universe.getInstance().getSolarSystemsAsList()
+                        .indexOf(new SolarSystem(solarArray[solarSystems.getSelectedItemPosition()],
+                                null, null, null)));
+
+        newTechLevel.setText(viewedSystem.getTechLevel().toString());
+        newResourceLevel.setText(viewedSystem.getResourceLevel().toString());
+        distance.setText(viewedSystem.distanceFrom(Universe.getInstance().getPlayer().getCoords()).toString());
     }
 
 
