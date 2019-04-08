@@ -1,5 +1,20 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -67,7 +82,41 @@ public class Universe {
                                                               0));
         }
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("android");
+
+        myRef.child("universe").child("player").child("name").setValue(single_instance.getPlayer().getName());
         return single_instance;
+    }
+//
+//    private static void saveAsText() {
+//        try {
+//            PrintWriter pw = new PrintWriter(file);
+//            sm.saveAsText(pw);
+//            pw.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            Log.d("UserManagerFacade", "Error opening the text file for save!");
+//            return false;
+//        }
+//
+//    }
+
+    public void loadUniverse() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("android");
+        myRef.child("universe").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                single_instance.getPlayer().setName(dataSnapshot.child("player/name").getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        Log.d("Name","Name:" + single_instance.getPlayer().getName());
     }
 
     public List<int[]> getValidCoords() {

@@ -16,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,12 +39,14 @@ public class ConfigurationActivity extends AppCompatActivity {
     private EditText engineer;
     private EditText pilot;
     private Button submitButton;
+    private Button loadButton;
 
     public static List<String> difficultyLevels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_configuration);
 
         difficulty = findViewById(R.id.difficulty_spinner);
@@ -54,6 +58,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         engineer = findViewById(R.id.edit_engineer);
         pilot = findViewById(R.id.edit_pilot);
         submitButton = findViewById(R.id.submit_configuration_button);
+        loadButton = findViewById(R.id.load_configuration_button);
 
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
 
@@ -89,6 +94,13 @@ public class ConfigurationActivity extends AppCompatActivity {
                     UniverseActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void onLoadPressed(View view) {
+        viewModel.loadGame();
+        Intent intent = new Intent(ConfigurationActivity.this,
+                UniverseActivity.class);
+        startActivity(intent);
     }
 
     private void updateView() {

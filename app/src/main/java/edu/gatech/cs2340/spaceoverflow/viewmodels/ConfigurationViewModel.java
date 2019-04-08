@@ -37,6 +37,10 @@ public class ConfigurationViewModel extends AndroidViewModel {
                 == TOTAL_SKILL;
     }
 
+    public void loadGame() {
+        Universe.getInstance().loadUniverse();
+    }
+
     public Integer skillsRemaining(Player player) {
         return 16 - (player.getPilotSkill()
                     + player.getFighterSkill()
