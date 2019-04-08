@@ -4,20 +4,22 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Ship {
-    public static final Ship GNAT = new Ship("Gnat", 10);
+    public static final Ship GNAT = new Ship("Gnat", 10, 100);
 
     private List<TradeGood> cargoHold;
     private int capacity;
     private String name;
+    private int fuel;
 
-    private Ship(String name, int capacity) {
+    private Ship(String name, int capacity, int fuel) {
         cargoHold = Arrays.asList(TradeGood.allGoods);
         this.capacity = capacity;
         this.name = name;
+        this.fuel = fuel;
     }
 
     public Ship(Ship ship) {
-        this(ship.name, ship.capacity);
+        this(ship.name, ship.capacity, ship.fuel);
     }
 
     public List<TradeGood> getCargoHold() {
@@ -71,7 +73,26 @@ public class Ship {
         return true;
     }
 
+    public boolean travelTo(SolarSystem planet) {
+        int distance = planet.distanceFrom(Universe.getInstance().getPlayer().getCoords());
+        if (distance <= fuel) {
+            Universe.getInstance().getPlayer().setCurrentSystem(planet);
+            burnFuel(distance);
+            return true;
+        }
+        return false;
+    }
+
+
     public String getName() {
         return name;
+    }
+
+    public void burnFuel(int burned) {
+        fuel -= burned;
+    }
+
+    public Integer getFuel() {
+        return fuel;
     }
 }

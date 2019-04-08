@@ -29,6 +29,15 @@ public class SolarSystem {
         market = null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof SolarSystem)) {
+            return false;
+        }
+        SolarSystem other = (SolarSystem) o;
+        return other.getName().equals(this.name);
+    }
+
     public String getName() {
         return name;
     }
@@ -55,6 +64,11 @@ public class SolarSystem {
 
     public void initializeMarket() {
         market = new Market(this);
+    }
+
+    public Integer distanceFrom(int[] coords) {
+        return (int) Math.sqrt(
+                Math.pow(coords[0] - this.coords[0], 2) + Math.pow(coords[1] - this.coords[1], 2));
     }
 
     public Market getMarket() {

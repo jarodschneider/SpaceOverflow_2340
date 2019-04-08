@@ -1,23 +1,30 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
 public enum ResourceLevel {
-    NOSPECIALRESOURCES(0),
-    MINERALRICH(1),
-    MINERALPOOR(2),
-    DESERT(3),
-    LOTSOFWATER(4),
-    RICHSOIL(5),
-    POORSOIL(6),
-    RICHFAUNA(7),
-    LIFELESS(8),
-    WEIRDMUSHROOMS(9),
-    LOTSOFHERBS(10),
-    ARTISTIC(11),
-    WARLIKE(12);
+    NOSPECIALRESOURCES(0, "NOSPECIALRESOURCES"),
+    MINERALRICH(1, "MINERALRICH"),
+    MINERALPOOR(2, "MINERALPOOR"),
+    DESERT(3, "DESERT"),
+    LOTSOFWATER(4, "LOTSOFWATER"),
+    RICHSOIL(5, "RICHSOIL"),
+    POORSOIL(6, "POORSOIL"),
+    RICHFAUNA(7, "RICHFAUNA"),
+    LIFELESS(8, "LIFELESS"),
+    WEIRDMUSHROOMS(9, "WEIRDMUSHROOMS"),
+    LOTSOFHERBS(10, "LOTSOFHERBS"),
+    ARTISTIC(11, "ARTISTIC"),
+    WARLIKE(12, "WARLIKE");
 
     private final int resourceLevel;
+    private final String string;
 
-    ResourceLevel(int resourceLevel) {
+    ResourceLevel(int resourceLevel, String string) {
         this.resourceLevel = resourceLevel;
+        this.string = string;
+    }
+
+    @Override
+    public String toString() {
+        return string;
     }
 }

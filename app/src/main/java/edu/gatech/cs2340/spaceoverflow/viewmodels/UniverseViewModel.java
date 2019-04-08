@@ -24,5 +24,9 @@ public class UniverseViewModel extends AndroidViewModel {
     public void initializePlayerLocation() {
         Universe.getInstance().getPlayer().setCoords(Universe.getInstance().getValidCoords()
                 .get(new Random().nextInt(Universe.getInstance().getValidCoords().size())));
+
+        Universe.getInstance().getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
+                [Universe.getInstance().getPlayer().getCoords()[1]]
+                .initializeMarket();
     }
 }

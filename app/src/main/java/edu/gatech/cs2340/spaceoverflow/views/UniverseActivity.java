@@ -54,23 +54,38 @@ public class UniverseActivity extends AppCompatActivity {
         ship.setText(Universe.getInstance().getPlayer().getShip().getName());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        name.setText(Universe.getInstance().getPlayer().getName());
+        pilot.setText(Universe.getInstance().getPlayer().getPilotSkill().toString());
+        fighter.setText(Universe.getInstance().getPlayer().getFighterSkill().toString());
+        trader.setText(Universe.getInstance().getPlayer().getTraderSkill().toString());
+        engineer.setText(Universe.getInstance().getPlayer().getEngineerSkill().toString());
+        solarSystem.setText(viewModel.getPlanet().getName());
+        ship.setText(Universe.getInstance().getPlayer().getShip().getName());
+    }
+
+
     public void onBuyGoodsPressed(View view) {
         Log.d("Universe", "Buy goods pressed");
-
-        Universe.getInstance().getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
-                                                [Universe.getInstance().getPlayer().getCoords()[1]]
-                                                .initializeMarket();
 
         Intent intent = new Intent(UniverseActivity.this, MarketActivity.class);
         startActivity(intent);
     }
 
     public void onSellGoodsPressed(View view) {
-        Universe.getInstance().getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
-                                                [Universe.getInstance().getPlayer().getCoords()[1]]
-                                                .initializeMarket();
-
         Intent intent = new Intent(UniverseActivity.this, SellActivity.class);
         startActivity(intent);
     }
+
+    public void onTravelPressed(View view) {
+        /*Universe.getInstance().getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
+                [Universe.getInstance().getPlayer().getCoords()[1]]
+                .initializeMarket();*/
+
+        Intent intent = new Intent(UniverseActivity.this, TravelActivity.class);
+        startActivity(intent);
+    }
+
 }
