@@ -23,6 +23,7 @@ import java.util.List;
 
 import edu.gatech.cs2340.spaceoverflow.R;
 import edu.gatech.cs2340.spaceoverflow.model.Player;
+import edu.gatech.cs2340.spaceoverflow.model.Universe;
 import edu.gatech.cs2340.spaceoverflow.viewmodels.ConfigurationViewModel;
 
 public class ConfigurationActivity extends AppCompatActivity {
@@ -97,6 +98,9 @@ public class ConfigurationActivity extends AppCompatActivity {
     }
 
     public void onLoadPressed(View view) {
+        Universe.getInstance().loadUniverse();
+
+        Log.d("DEV", Universe.getInstance().getPlayer().getName());
         Intent intent = new Intent(ConfigurationActivity.this,
                 UniverseActivity.class);
         startActivity(intent);

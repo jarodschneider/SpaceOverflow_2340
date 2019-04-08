@@ -1,7 +1,13 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
+import android.util.Log;
+
+import com.google.firebase.FirebaseError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -129,6 +135,98 @@ public class Universe {
         }
         return list;
     }
+
+    public Player loadUniverse() {
+        Log.d("DEV", single_instance.player.getName());
+        myRef.child("game").child("player").child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                single_instance.player.setName(dataSnapshot.getValue(String.class));
+                Log.d("DEV", single_instance.player.getName());
+            }
+
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post
+                // failed, log a message
+                Log.d("DEV", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
+        myRef.child("game").child("player").child("pilotSkill").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                single_instance.player.setPilotSkill(dataSnapshot.getValue(Integer.class));
+                Log.d("DEV", single_instance.player.getName());
+            }
+
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post
+                // failed, log a message
+                Log.d("DEV", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
+        myRef.child("game").child("player").child("fighterSkill").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                single_instance.player.setFighterSkill(dataSnapshot.getValue(Integer.class));
+                Log.d("DEV", single_instance.player.getName());
+            }
+
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post
+                // failed, log a message
+                Log.d("DEV", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        });
+//        myRef.child("game").child("player").child("traderSkill").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                single_instance.player.setTraderSkill(dataSnapshot.getValue(Integer.class));
+//                Log.d("DEV", single_instance.player.getName());
+//            }
+//
+//            public void onCancelled(DatabaseError databaseError) {
+//                // Getting Post
+//                // failed, log a message
+//                Log.d("DEV", "loadPost:onCancelled", databaseError.toException());
+//                // ...
+//            }
+//        });
+//        myRef.child("game").child("player").child("engineerSkill").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                single_instance.player.setEngineerSkill(dataSnapshot.getValue(Integer.class));
+//                Log.d("DEV", single_instance.player.getName());
+//            }
+//
+//            public void onCancelled(DatabaseError databaseError) {
+//                // Getting Post
+//                // failed, log a message
+//                Log.d("DEV", "loadPost:onCancelled", databaseError.toException());
+//                // ...
+//            }
+//        });
+//        myRef.child("game").child("systems").child("engineerSkill").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                single_instance.player.setEngineerSkill(dataSnapshot.getValue(Integer.class));
+//                Log.d("DEV", single_instance.player.getName());
+//            }
+//
+//            public void onCancelled(DatabaseError databaseError) {
+//                // Getting Post
+//                // failed, log a message
+//                Log.d("DEV", "loadPost:onCancelled", databaseError.toException());
+//                // ...
+//            }
+//        });
+
+        Log.d("DEV", single_instance.player.getName());
+        return single_instance.player;
+    }
+
 
     public List<List<SolarSystem>> getSolarSystems() {
         return solarSystems;
