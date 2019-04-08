@@ -109,6 +109,8 @@ public class TravelActivity extends AppCompatActivity {
                                 fuelNeeded),
                         Toast.LENGTH_SHORT).show();
             } else {
+                Intent intent = new Intent(TravelActivity.this, EventActivity.class);
+                startActivity(intent);
                 finish();
             }
         } else {
