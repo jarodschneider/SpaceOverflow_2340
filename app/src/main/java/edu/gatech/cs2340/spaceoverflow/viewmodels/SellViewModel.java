@@ -15,7 +15,7 @@ public class SellViewModel extends AndroidViewModel {
 
     public SolarSystem getSolarSystem() {
         return Universe.getInstance()
-                .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
-                [Universe.getInstance().getPlayer().getCoords()[1]];
+                .getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
+                .get(Universe.getInstance().getPlayer().getCoords().get(1));
     }
 }

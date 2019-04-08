@@ -1,32 +1,21 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class Universe {
 
-    private static Universe single_instance = null;
+    private static Universe single_instance;
 
-    private List<int[]> validCoords;
-    private SolarSystem[][] solarSystems = new SolarSystem[150][100];
+    private static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private static DatabaseReference myRef = database.getReference();
+
+    private List<List<Integer>> validCoords;
+    private List<List<SolarSystem>> solarSystems = new ArrayList<>();
     private Player player;
 
     private static final String SolarSystemNames[] = {
@@ -45,7 +34,7 @@ public class Universe {
     public String toString() {
 
         StringBuilder universeSB = new StringBuilder();
-        for (SolarSystem[] system: solarSystems) {
+        for (List<SolarSystem> system: solarSystems) {
             for (SolarSystem system2: system) {
                 if (system2 == null) {
                     universeSB.append("-");
@@ -62,14 +51,22 @@ public class Universe {
     private Universe(Player player) {
         this.player = player;
         validCoords = new ArrayList<>();
+
+        for (int i = 0; i < 150; i++) {
+            solarSystems.add(new ArrayList<SolarSystem>());
+            for (int j = 0; j < 100; j++) {
+                solarSystems.get(i).add(null);
+            }
+        }
+
         for (String SolarSystemName : SolarSystemNames) {
-            int coords[] = generateCoords();
+            List<Integer> coords = generateCoords();
             SolarSystem s = new SolarSystem(
                     SolarSystemName,
                     coords,
                     TechLevel.values()[new Random().nextInt(8)],
                     ResourceLevel.values()[new Random().nextInt(13)]);
-            solarSystems[coords[0]][coords[1]] = s;
+            solarSystems.get(coords.get(0)).set(coords.get(1), s);
             validCoords.add(coords);
         }
     }
@@ -82,10 +79,6 @@ public class Universe {
                                                               0));
         }
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("android");
-
-        myRef.child("universe").child("player").child("name").setValue(single_instance.getPlayer().getName());
         return single_instance;
     }
 //
@@ -102,37 +95,27 @@ public class Universe {
 //
 //    }
 
-    public void loadUniverse() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("android");
-        myRef.child("universe").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                single_instance.getPlayer().setName(dataSnapshot.child("player/name").getValue(String.class));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        Log.d("Name","Name:" + single_instance.getPlayer().getName());
-    }
-
-    public List<int[]> getValidCoords() {
+    public List<List<Integer>> getValidCoords() {
         return validCoords;
     }
 
     public static void createUniverse(Player player) {
         single_instance = new Universe(player);
+
+        myRef.child("game").child("player").setValue(single_instance.player);
+        myRef.child("game").child("systems").setValue(single_instance.solarSystems);
+        myRef.child("game").child("validCoords").setValue(single_instance.validCoords);
     }
 
-    private int[] generateCoords() {
+    private List<Integer> generateCoords() {
         Random rand = new Random();
-        int x = rand.nextInt(solarSystems.length);
-        int y = rand.nextInt(solarSystems[0].length);
-        if (solarSystems[x][y] == null) {
-            return new int[]{x, y};
+        int x = rand.nextInt(solarSystems.size());
+        int y = rand.nextInt(solarSystems.get(0).size());
+        if (solarSystems.get(x).get(y) == null) {
+            List<Integer> generated = new ArrayList<>();
+            generated.add(x);
+            generated.add(y);
+            return generated;
         } else {
             return generateCoords();
         }
@@ -141,13 +124,13 @@ public class Universe {
 
     public List<SolarSystem> getSolarSystemsAsList() {
         List<SolarSystem> list = new ArrayList<>();
-        for (SolarSystem[] arr : solarSystems) {
-            list.addAll(Arrays.asList(arr));
+        for (List<SolarSystem> arr : solarSystems) {
+            list.addAll(arr);
         }
         return list;
     }
 
-    public SolarSystem[][] getSolarSystems() {
+    public List<List<SolarSystem>> getSolarSystems() {
         return solarSystems;
     }
 

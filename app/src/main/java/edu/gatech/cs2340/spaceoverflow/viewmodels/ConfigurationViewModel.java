@@ -1,12 +1,11 @@
 package edu.gatech.cs2340.spaceoverflow.viewmodels;
 
-import android.arch.lifecycle.AndroidViewModel;
 import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import edu.gatech.cs2340.spaceoverflow.model.Player;
-import edu.gatech.cs2340.spaceoverflow.model.SolarSystem;
 import edu.gatech.cs2340.spaceoverflow.model.Universe;
 
 public class ConfigurationViewModel extends AndroidViewModel {
@@ -37,10 +36,6 @@ public class ConfigurationViewModel extends AndroidViewModel {
                 == TOTAL_SKILL;
     }
 
-    public void loadGame() {
-        Universe.getInstance().loadUniverse();
-    }
-
     public Integer skillsRemaining(Player player) {
         return 16 - (player.getPilotSkill()
                     + player.getFighterSkill()
@@ -49,18 +44,18 @@ public class ConfigurationViewModel extends AndroidViewModel {
     }
 
     public void createUniverse(Player player) {
-        largeLog("ConfigurationViewModel", Universe.getInstance().toString());
+        //largeLog("ConfigurationViewModel", Universe.getInstance().toString());
 
         Universe.createUniverse(player);
 
-        for (SolarSystem[] sA: Universe.getInstance().getSolarSystems()) {
-            for (SolarSystem s: sA) {
-                if (s != null) {
-                    Log.i("ConfigurationViewModel", s.getName() + " " + s.getTechLevel().getLevel());
-                    //Log.i("ConfigurationViewModel", s.toString());
-                }
-            }
-        }
+//        for (SolarSystem[] sA: Universe.getInstance().getSolarSystems()) {
+//            for (SolarSystem s: sA) {
+//                if (s != null) {
+//                    Log.i("ConfigurationViewModel", s.getName() + " " + s.getTechLevel().getLevel());
+//                    //Log.i("ConfigurationViewModel", s.toString());
+//                }
+//            }
+//        }
 
         Log.i("ConfigurationViewModel", "The player was created with 1000 credits and a Gnat spaceship. " + player.toString());
     }

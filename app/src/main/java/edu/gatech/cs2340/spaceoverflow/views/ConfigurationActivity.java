@@ -97,7 +97,6 @@ public class ConfigurationActivity extends AppCompatActivity {
     }
 
     public void onLoadPressed(View view) {
-        viewModel.loadGame();
         Intent intent = new Intent(ConfigurationActivity.this,
                 UniverseActivity.class);
         startActivity(intent);
