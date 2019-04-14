@@ -39,6 +39,9 @@ public class Ship {
     }
 
     public boolean addGood(TradeGood tradeGood) {
+        if (tradeGood == null) {
+            return false;
+        }
         if (capacity > 0) {
             if (cargoHold.contains(tradeGood)) {
                 TradeGood curr = cargoHold.get(cargoHold.indexOf(tradeGood));
@@ -81,6 +84,10 @@ public class Ship {
             return true;
         }
         return false;
+    }
+
+    public boolean contains(TradeGood tradeGood) {
+        return cargoHold.get(cargoHold.indexOf(tradeGood)).getQuantity() > 0;
     }
 
 
