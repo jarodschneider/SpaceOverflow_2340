@@ -17,16 +17,16 @@ public class UniverseViewModel extends AndroidViewModel {
 
     public SolarSystem getPlanet() {
         return Universe.getInstance()
-                .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
-                                    [Universe.getInstance().getPlayer().getCoords()[1]];
+                .getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
+                                    .get(Universe.getInstance().getPlayer().getCoords().get(1));
     }
 
     public void initializePlayerLocation() {
         Universe.getInstance().getPlayer().setCoords(Universe.getInstance().getValidCoords()
                 .get(new Random().nextInt(Universe.getInstance().getValidCoords().size())));
 
-        Universe.getInstance().getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
-                [Universe.getInstance().getPlayer().getCoords()[1]]
+        Universe.getInstance().getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
+                .get(Universe.getInstance().getPlayer().getCoords().get(1))
                 .initializeMarket();
     }
 }

@@ -15,8 +15,12 @@
       },
       "oauth_client": [
         {
-          "client_id": "1053673149947-jpttd9egr65i280e8dcq9igmtuqcm39i.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "1053673149947-jrl4tiom12hlarht3384cuof89btm32o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.gatech.cs2340.spaceoverflow",
+            "certificate_hash": "89253ada9eb34297e078f92d598811c802630ece"
+          }
         }
       ],
       "api_key": [
@@ -25,15 +29,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053673149947-jpttd9egr65i280e8dcq9igmtuqcm39i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -19,8 +19,8 @@ import edu.gatech.cs2340.spaceoverflow.model.Universe;
 public class SellAdapter extends RecyclerView.Adapter<SellAdapter.SellViewHolder> {
 
     private List<TradeGood> goodList = Universe.getInstance()
-            .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
-            [Universe.getInstance().getPlayer().getCoords()[1]]
+            .getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
+            .get(Universe.getInstance().getPlayer().getCoords().get(1))
             .getMarket().getTradeGoods();
 
     @NonNull
@@ -78,8 +78,8 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.SellViewHolder
     @Override
     public int getItemCount() {
         return Universe.getInstance()
-                .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
-                [Universe.getInstance().getPlayer().getCoords()[1]]
+                .getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
+                .get(Universe.getInstance().getPlayer().getCoords().get(1))
                 .getMarket().getTradeGoods().size();
     }
 

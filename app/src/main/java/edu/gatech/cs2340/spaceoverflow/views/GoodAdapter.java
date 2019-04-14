@@ -1,7 +1,6 @@
 package edu.gatech.cs2340.spaceoverflow.views;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -75,8 +74,8 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
     @Override
     public int getItemCount() {
         return Universe.getInstance()
-                .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
-                [Universe.getInstance().getPlayer().getCoords()[1]]
+                .getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
+                .get(Universe.getInstance().getPlayer().getCoords().get(1))
                 .getMarket().getTradeGoods().size();
     }
 
@@ -86,7 +85,6 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
     }
 
     class GoodViewHolder extends RecyclerView.ViewHolder {
-        CardView cv;
         private Button buyButton;
         private TextView item;
         private TextView numAvailable;
@@ -94,7 +92,6 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
 
         public GoodViewHolder(@NonNull View itemView) {
             super(itemView);
-            cv = itemView.findViewById(R.id.card_view);
             buyButton = itemView.findViewById(R.id.buy_button);
             item = itemView.findViewById(R.id.item_name);
             numAvailable = itemView.findViewById(R.id.num_available);
