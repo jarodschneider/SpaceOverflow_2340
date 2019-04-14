@@ -39,6 +39,9 @@ public class Ship {
     }
 
     public boolean addGood(TradeGood tradeGood) {
+        if (tradeGood == null) {
+            return false;
+        }
         if (capacity > 0) {
             if (cargoHold.contains(tradeGood)) {
                 TradeGood curr = cargoHold.get(cargoHold.indexOf(tradeGood));
@@ -56,16 +59,11 @@ public class Ship {
     }
 
     public boolean removeGood(TradeGood tradeGood) {
-        List<TradeGood> market = Universe.getInstance()
-                .getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
-                .get(Universe.getInstance().getPlayer().getCoords().get(1))
-                .getMarket().getTradeGoods();
-        if (market.contains(tradeGood)) {
+        if (cargoHold.get(cargoHold.indexOf(tradeGood)).getQuantity() > 0) {
 
-            TradeGood curr = market.get(market.indexOf(tradeGood));
-            curr.setQuantity(curr.getQuantity() + 1);
             cargoHold.get(cargoHold.indexOf(tradeGood))
                     .setQuantity(cargoHold.get(cargoHold.indexOf(tradeGood)).getQuantity() - 1);
+
         } else {
             return false;
         }
@@ -81,6 +79,10 @@ public class Ship {
             return true;
         }
         return false;
+    }
+
+    public boolean contains(TradeGood tradeGood) {
+        return cargoHold.get(cargoHold.indexOf(tradeGood)).getQuantity() > 0;
     }
 
 

@@ -42,8 +42,15 @@ public class Player {
     }
 
     public boolean sellGood(TradeGood tradeGood) {
-        if (ship.getCargoHold().get(ship.getCargoHold().indexOf(tradeGood)).getQuantity() > 0) {
+        List<TradeGood> market = Universe.getInstance()
+                .getSolarSystems().get(coords.get(0))
+                .get(coords.get(1))
+                .getMarket().getTradeGoods();
+        if (market.contains(tradeGood)) {
             if (ship.removeGood(tradeGood)) {
+                TradeGood curr = market.get(market.indexOf(tradeGood));
+                curr.setQuantity(curr.getQuantity() + 1);
+
                 credits += tradeGood.getPrice();
                 return true;
             } else {
