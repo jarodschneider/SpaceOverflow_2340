@@ -42,20 +42,9 @@ public class Player {
     }
 
     public boolean sellGood(TradeGood tradeGood) {
-        List<TradeGood> market = Universe.getInstance()
-                .getSolarSystems().get(coords.get(0))
-                .get(coords.get(1))
-                .getMarket().getTradeGoods();
-        if (market.contains(tradeGood)) {
-            if (ship.removeGood(tradeGood)) {
-                TradeGood curr = market.get(market.indexOf(tradeGood));
-                curr.setQuantity(curr.getQuantity() + 1);
-
-                credits += tradeGood.getPrice();
-                return true;
-            } else {
-                return false;
-            }
+        if (ship.removeGood(tradeGood)) {
+            credits += tradeGood.getPrice();
+            return true;
         } else {
             return false;
         }
