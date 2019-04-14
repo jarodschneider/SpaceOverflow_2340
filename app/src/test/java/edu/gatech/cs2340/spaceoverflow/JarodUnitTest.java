@@ -3,6 +3,8 @@ package edu.gatech.cs2340.spaceoverflow;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import edu.gatech.cs2340.spaceoverflow.model.Ship;
 import edu.gatech.cs2340.spaceoverflow.model.TradeGood;
 
@@ -92,6 +94,36 @@ public class JarodUnitTest {
                 assertFalse(ship.addGood(tradeGood));
                 assertEquals(expectedQuantity,(int) ship.getCargoHold().get(INDEX).getQuantity());
                 assertEquals(expectedCapacity, (int) ship.getCapacity());
+            }
+        }
+    }
+
+    @Test
+    public void addEachToEmptyHoldList() {
+        int expectedCapacity = 10;
+        for (TradeGood tradeGood : TradeGood.allGoods) {
+            ship.setCargoHold(new ArrayList<TradeGood>());
+            assertTrue(ship.addGood(tradeGood));
+            assertEquals(--expectedCapacity, (int) ship.getCapacity());
+        }
+    }
+
+    @Test
+    public void addEachMultipleToEmptyHoldList() {
+        for (TradeGood tradeGood : TradeGood.allGoods) {
+            ship.setCargoHold(new ArrayList<TradeGood>());
+            ship.setCapacity(10);
+
+            int expectedCapacity = 10;
+
+            for (int i = 0; i < 999999; i++) {
+                if (expectedCapacity > 0) {
+                    assertTrue(ship.addGood(tradeGood));
+                    assertEquals(--expectedCapacity, (int) ship.getCapacity());
+                } else {
+                    assertFalse(ship.addGood(tradeGood));
+                    assertEquals(expectedCapacity, (int) ship.getCapacity());
+                }
             }
         }
     }
