@@ -50,21 +50,32 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.SellViewHolder
         holder.sellButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Universe.getInstance().getPlayer().sellGood(tradeGood)) {
-                    holder.numAvailable.setText(tradeGood.getQuantity().toString());
-                    List<TradeGood> playerGoods = Universe.getInstance()
-                                                    .getPlayer().getShip().getCargoHold();
+                List<TradeGood> market = Universe.getInstance()
+                        .getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
+                        .get(Universe.getInstance().getPlayer().getCoords().get(1))
+                        .getMarket().getTradeGoods();
 
-                    Integer playerQuantity = playerGoods.size() > finalPosition ?
-                                                playerGoods.get(finalPosition).getQuantity() : 0;
+                if (market.contains(tradeGood)) {
+                    if (Universe.getInstance().getPlayer().sellGood(tradeGood)) {
+                        TradeGood curr = market.get(market.indexOf(tradeGood));
+                        curr.setQuantity(curr.getQuantity() + 1);
+                        tradeGood.setQuantity(tradeGood.getQuantity() + 1);
 
-                    holder.numHave.setText(playerQuantity.toString());
-                } else {
-                    Toast.makeText(view.getContext(), String.format("Can't sell with %d in hold",
-                            Universe.getInstance().getPlayer().getShip()
-                                    .getCargoHold().get(Universe.getInstance().getPlayer()
-                                    .getShip().getCargoHold().indexOf(tradeGood)).getQuantity()),
-                            Toast.LENGTH_SHORT).show();
+                        holder.numAvailable.setText(tradeGood.getQuantity().toString());
+                        List<TradeGood> playerGoods = Universe.getInstance()
+                                .getPlayer().getShip().getCargoHold();
+
+                        Integer playerQuantity = playerGoods.size() > finalPosition ?
+                                playerGoods.get(finalPosition).getQuantity() : 0;
+
+                        holder.numHave.setText(playerQuantity.toString());
+                    } else {
+                        Toast.makeText(view.getContext(), String.format("Can't sell with %d in hold",
+                                Universe.getInstance().getPlayer().getShip()
+                                        .getCargoHold().get(Universe.getInstance().getPlayer()
+                                        .getShip().getCargoHold().indexOf(tradeGood)).getQuantity()),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
