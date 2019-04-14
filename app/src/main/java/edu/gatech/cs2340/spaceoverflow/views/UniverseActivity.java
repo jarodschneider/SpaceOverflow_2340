@@ -31,7 +31,7 @@ public class UniverseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_universe);
-
+        Universe.getInstance().loadUniverse();
         name = findViewById(R.id.name_text);
         pilot = findViewById(R.id.pilot_points);
         fighter = findViewById(R.id.fighter_points);
@@ -43,7 +43,7 @@ public class UniverseActivity extends AppCompatActivity {
         ship = findViewById(R.id.ship_text);
 
         viewModel = ViewModelProviders.of(this).get(UniverseViewModel.class);
-
+        Log.d("DEVV", Universe.getInstance().getPlayer().getName());
         name.setText(Universe.getInstance().getPlayer().getName());
         pilot.setText(Universe.getInstance().getPlayer().getPilotSkill().toString());
         fighter.setText(Universe.getInstance().getPlayer().getFighterSkill().toString());

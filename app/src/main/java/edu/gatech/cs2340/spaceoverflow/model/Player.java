@@ -1,5 +1,7 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
+import java.util.List;
+
 public class Player {
 
     private String name;
@@ -9,7 +11,7 @@ public class Player {
     private int engineerSkill;
 
     private int credits;
-    private int[] coords;
+    private List<Integer> coords;
     private SolarSystem currentSystem;
     private Ship ship;
 
@@ -112,11 +114,11 @@ public class Player {
         this.ship = ship;
     }
 
-    public int[] getCoords() {
+    public List<Integer> getCoords() {
         return coords;
     }
 
-    public void setCoords(int[] coords) {
+    public void setCoords(List<Integer> coords) {
         this.coords = coords;
     }
 

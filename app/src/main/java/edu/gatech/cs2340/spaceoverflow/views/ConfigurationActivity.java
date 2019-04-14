@@ -16,11 +16,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+
 import java.util.Arrays;
 import java.util.List;
 
 import edu.gatech.cs2340.spaceoverflow.R;
 import edu.gatech.cs2340.spaceoverflow.model.Player;
+import edu.gatech.cs2340.spaceoverflow.model.Universe;
 import edu.gatech.cs2340.spaceoverflow.viewmodels.ConfigurationViewModel;
 
 public class ConfigurationActivity extends AppCompatActivity {
@@ -37,12 +40,14 @@ public class ConfigurationActivity extends AppCompatActivity {
     private EditText engineer;
     private EditText pilot;
     private Button submitButton;
+    private Button loadButton;
 
     public static List<String> difficultyLevels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_configuration);
 
         difficulty = findViewById(R.id.difficulty_spinner);
@@ -54,6 +59,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         engineer = findViewById(R.id.edit_engineer);
         pilot = findViewById(R.id.edit_pilot);
         submitButton = findViewById(R.id.submit_configuration_button);
+        loadButton = findViewById(R.id.load_configuration_button);
 
         viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
 
@@ -89,6 +95,15 @@ public class ConfigurationActivity extends AppCompatActivity {
                     UniverseActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void onLoadPressed(View view) {
+        Universe.getInstance().loadUniverse();
+
+        Log.d("DEV", Universe.getInstance().getPlayer().getName());
+        Intent intent = new Intent(ConfigurationActivity.this,
+                UniverseActivity.class);
+        startActivity(intent);
     }
 
     private void updateView() {

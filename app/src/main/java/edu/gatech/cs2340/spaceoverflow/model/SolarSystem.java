@@ -1,11 +1,11 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class SolarSystem {
 
     private String name;
-    private int[] coords;
+    private List<Integer> coords;
     private TechLevel techLevel;
     private ResourceLevel resourceLevel;
 
@@ -15,13 +15,13 @@ public class SolarSystem {
     public String toString() {
         return "SolarSystem{" +
                 "name='" + name + '\'' +
-                ", coords=" + Arrays.toString(coords) +
+                ", coords=" + coords.toString() +
                 ", techLevel=" + techLevel +
                 ", resourceLevel=" + resourceLevel +
                 '}';
     }
 
-    public SolarSystem(String name, int[] coords, TechLevel techLevel, ResourceLevel resourceLevel) {
+    public SolarSystem(String name, List<Integer> coords, TechLevel techLevel, ResourceLevel resourceLevel) {
         this.name = name;
         this.coords = coords;
         this.techLevel = techLevel;
@@ -42,7 +42,7 @@ public class SolarSystem {
         return name;
     }
 
-    public int[] getCoords() {
+    public List<Integer> getCoords() {
         return coords;
     }
 
@@ -66,9 +66,9 @@ public class SolarSystem {
         market = new Market(this);
     }
 
-    public Integer distanceFrom(int[] coords) {
+    public Integer distanceFrom(List<Integer> coords) {
         return (int) Math.sqrt(
-                Math.pow(coords[0] - this.coords[0], 2) + Math.pow(coords[1] - this.coords[1], 2));
+                Math.pow(coords.get(0) - this.coords.get(0), 2) + Math.pow(coords.get(1) - this.coords.get(1), 2));
     }
 
     public Market getMarket() {

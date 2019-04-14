@@ -146,4 +146,14 @@
         android:onClick="onSubmitPressed"
         android:text="Submit" />
 
+    <Button
+        android:id="@+id/load_configuration_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_engineer"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="262dp"
+        android:onClick="onLoadPressed"
+        android:text="Load" />
+
 </RelativeLayout>

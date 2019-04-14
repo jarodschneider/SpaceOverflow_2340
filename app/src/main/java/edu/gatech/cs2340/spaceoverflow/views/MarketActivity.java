@@ -70,8 +70,8 @@ public class MarketActivity extends AppCompatActivity {
         super.onResume();
 
         adapter.setGoodList(Universe.getInstance()
-                .getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
-                [Universe.getInstance().getPlayer().getCoords()[1]]
+                .getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
+                .get(Universe.getInstance().getPlayer().getCoords().get(1))
                 .getMarket().getTradeGoods());
     }
 }
