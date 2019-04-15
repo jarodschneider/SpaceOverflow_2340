@@ -59,6 +59,9 @@ public class Ship {
     }
 
     public boolean removeGood(TradeGood tradeGood) {
+        if (tradeGood == null) {
+            return false;
+        }
         if (cargoHold.get(cargoHold.indexOf(tradeGood)).getQuantity() > 0) {
 
             cargoHold.get(cargoHold.indexOf(tradeGood))
