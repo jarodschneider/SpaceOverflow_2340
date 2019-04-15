@@ -86,7 +86,7 @@ public class TravelActivity extends AppCompatActivity {
                 .getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
                 .get(Universe.getInstance().getPlayer().getCoords().get(1));
         if (!newSystem.equals(oldSystem)) {
-            if (!Universe.getInstance().getPlayer().getShip().travelTo(newSystem)) {
+            if (!Universe.getInstance().getPlayer().getShip().travelTo(newSystem, Universe.getInstance().getPlayer())) {
                 int fuelNeeded = newSystem.distanceFrom(oldSystem.getCoords());
                 Toast.makeText(this,
                         String.format("Cannot travel to %s with %d fuel (%d fuel required)",

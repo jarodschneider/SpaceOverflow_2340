@@ -74,10 +74,13 @@ public class Ship {
         return true;
     }
 
-    public boolean travelTo(SolarSystem planet) {
-        int distance = planet.distanceFrom(Universe.getInstance().getPlayer().getCoords());
-        if (distance <= fuel) {
-            Universe.getInstance().getPlayer().setCurrentSystem(planet);
+    public boolean travelTo(SolarSystem planet, Player player) {
+        if(planet == null || player == null) {
+            return false;
+        }
+        int distance = planet.distanceFrom(player.getCoords());
+        if (distance <= fuel && distance > 0) {
+            player.setCurrentSystem(planet);
             burnFuel(distance);
             return true;
         }
