@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Market class
+ */
 public class Market {
 
     private List<TradeGood> tradeGoods;
 
-    public Market(SolarSystem solarSystem) {
+    Market(SolarSystem solarSystem) {
         tradeGoods = new ArrayList<>();
         TradeGood[] all = allGoods();
 
@@ -26,16 +29,12 @@ public class Market {
         }
     }
 
+    /**
+     * Returns market's goods list
+     * @return goods list
+     */
     public List<TradeGood> getTradeGoods() {
         return tradeGoods;
-    }
-
-    public void buyGood(Ship ship, TradeGood tradeGood) {
-        ship.addGood(tradeGood);
-    }
-
-    public void sellGood(Ship ship, TradeGood tradeGood) {
-
     }
 
     private TradeGood[] allGoods() {

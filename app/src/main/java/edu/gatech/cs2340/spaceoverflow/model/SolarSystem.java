@@ -2,6 +2,9 @@ package edu.gatech.cs2340.spaceoverflow.model;
 
 import java.util.List;
 
+/**
+ * SolarSystem class
+ */
 public class SolarSystem {
 
     private String name;
@@ -21,6 +24,14 @@ public class SolarSystem {
                 '}';
     }
 
+    /**
+     * Constructor
+     *
+     * @param name name
+     * @param coords coordinates
+     * @param techLevel TechLevel
+     * @param resourceLevel ResourceLevel
+     */
     public SolarSystem(String name, List<Integer> coords, TechLevel techLevel, ResourceLevel resourceLevel) {
         this.name = name;
         this.coords = coords;
@@ -38,39 +49,65 @@ public class SolarSystem {
         return other.getName().equals(this.name);
     }
 
+    /**
+     * Gets name
+     *
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets coordinates
+     *
+     * @return coordinates
+     */
     public List<Integer> getCoords() {
         return coords;
     }
 
+    /**
+     * Gets TechLevel
+     *
+     * @return techLevel
+     */
     public TechLevel getTechLevel() {
         return techLevel;
     }
 
-    public void setTechLevel(TechLevel techLevel) {
-        this.techLevel = techLevel;
-    }
-
+    /**
+     * Gets ResourceLevel
+     *
+     * @return resourceLevel
+     */
     public ResourceLevel getResourceLevel() {
         return resourceLevel;
     }
 
-    public void setResourceLevel(ResourceLevel resourceLevel) {
-        this.resourceLevel = resourceLevel;
-    }
-
+    /**
+     * Initializes market
+     */
     public void initializeMarket() {
         market = new Market(this);
     }
 
+    /**
+     * Calculates distance from coordinates
+     *
+     * @param coords coordinates of other location
+     * @return distance
+     */
     public Integer distanceFrom(List<Integer> coords) {
         return (int) Math.sqrt(
                 Math.pow(coords.get(0) - this.coords.get(0), 2) + Math.pow(coords.get(1) - this.coords.get(1), 2));
     }
 
+    /**
+     * Gets market
+     *
+     * @return market
+     */
     public Market getMarket() {
         return market;
     }

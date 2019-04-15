@@ -26,6 +26,9 @@ import edu.gatech.cs2340.spaceoverflow.model.Player;
 import edu.gatech.cs2340.spaceoverflow.model.Universe;
 import edu.gatech.cs2340.spaceoverflow.viewmodels.ConfigurationViewModel;
 
+/**
+ * Config activity
+ */
 public class ConfigurationActivity extends AppCompatActivity {
 
     private Player tempPlayer;
@@ -84,6 +87,11 @@ public class ConfigurationActivity extends AppCompatActivity {
         updateView();
     }
 
+    /**
+     * Config submit button pressed
+     *
+     * @param view current View
+     */
     public void onSubmitPressed(View view) {
         Log.d("Edit", "Submit commander pressed");
 
@@ -97,6 +105,11 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Load button pressed
+     *
+     * @param view current View
+     */
     public void onLoadPressed(View view) {
         Universe.getInstance().loadUniverse();
 

@@ -13,6 +13,9 @@ import edu.gatech.cs2340.spaceoverflow.R;
 import edu.gatech.cs2340.spaceoverflow.model.Universe;
 import edu.gatech.cs2340.spaceoverflow.viewmodels.SellViewModel;
 
+/**
+ * Selling activity
+ */
 public class SellActivity extends AppCompatActivity {
 
     private RecyclerView rv;
@@ -52,15 +55,28 @@ public class SellActivity extends AppCompatActivity {
         updateView();
     }
 
+    /**
+     * Updates view
+     */
     public void updateView() {
         credits.setText(Universe.getInstance().getPlayer().getCredits().toString());
         capacity.setText(Universe.getInstance().getPlayer().getShip().getCapacity().toString());
     }
 
+    /**
+     * Ends activity
+     *
+     * @param view current View
+     */
     public void onBackPressed(View view) {
         finish();
     }
 
+    /**
+     * Updates view to reflect books
+     *
+     * @param view current View
+     */
     public void onBooksPressed(View view) {
         updateView();
     }

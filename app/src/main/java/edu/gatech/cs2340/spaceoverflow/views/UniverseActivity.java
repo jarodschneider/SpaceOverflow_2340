@@ -13,6 +13,9 @@ import edu.gatech.cs2340.spaceoverflow.R;
 import edu.gatech.cs2340.spaceoverflow.model.Universe;
 import edu.gatech.cs2340.spaceoverflow.viewmodels.UniverseViewModel;
 
+/**
+ * Universe activity
+ */
 public class UniverseActivity extends AppCompatActivity {
 
     private UniverseViewModel viewModel;
@@ -67,6 +70,11 @@ public class UniverseActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Buy pressed
+     *
+     * @param view View
+     */
     public void onBuyGoodsPressed(View view) {
         Log.d("Universe", "Buy goods pressed");
 
@@ -74,11 +82,21 @@ public class UniverseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Sell pressed
+     *
+     * @param view View
+     */
     public void onSellGoodsPressed(View view) {
         Intent intent = new Intent(UniverseActivity.this, SellActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Travel pressed
+     *
+     * @param view View
+     */
     public void onTravelPressed(View view) {
         /*Universe.getInstance().getSolarSystems()[Universe.getInstance().getPlayer().getCoords()[0]]
                 [Universe.getInstance().getPlayer().getCoords()[1]]

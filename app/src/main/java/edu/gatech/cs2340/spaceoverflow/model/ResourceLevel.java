@@ -1,5 +1,8 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
+/**
+ * Resource Level
+ */
 public enum ResourceLevel {
     NOSPECIALRESOURCES(0, "NOSPECIALRESOURCES"),
     MINERALRICH(1, "MINERALRICH"),

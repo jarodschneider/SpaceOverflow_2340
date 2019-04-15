@@ -11,6 +11,9 @@ import android.widget.TextView;
 import edu.gatech.cs2340.spaceoverflow.R;
 import edu.gatech.cs2340.spaceoverflow.viewmodels.EventViewModel;
 
+/**
+ * Event activity
+ */
 public class EventActivity extends AppCompatActivity {
 
     private TextView eventText;
@@ -31,6 +34,10 @@ public class EventActivity extends AppCompatActivity {
         eventText.setText(viewModel.generateEvent());
     }
 
+    /**
+     * Continue through travel button pressed
+     * @param view current View
+     */
     public void onContinuePressed(View view) {
         Log.d("Event", "Continue button pressed");
 

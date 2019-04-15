@@ -1,5 +1,8 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
+/**
+ * TechLevel
+ */
 public enum TechLevel {
     PRE_AGRICULTURE(0, "Pre-Agriculture"),
     AGRICULTURE(1, "Agriculture"),
@@ -18,6 +21,11 @@ public enum TechLevel {
         this.string = string;
     }
 
+    /**
+     * Gets numeric level
+     *
+     * @return level
+     */
     public int getLevel() {
         return level;
     }

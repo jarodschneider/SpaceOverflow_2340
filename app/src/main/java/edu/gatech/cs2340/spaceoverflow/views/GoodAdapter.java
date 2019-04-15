@@ -16,6 +16,9 @@ import edu.gatech.cs2340.spaceoverflow.model.TradeGood;
 import edu.gatech.cs2340.spaceoverflow.R;
 import edu.gatech.cs2340.spaceoverflow.model.Universe;
 
+/**
+ * Buying RecyclerView Adapter
+ */
 public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder> {
 
     private List<TradeGood> goodList = new ArrayList<>();
@@ -79,7 +82,8 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
                 .getMarket().getTradeGoods().size();
     }
 
-    public void setGoodList(List<TradeGood> goods) {
+
+    void setGoodList(List<TradeGood> goods) {
         goodList = goods;
         notifyDataSetChanged();
     }
@@ -90,7 +94,7 @@ public class GoodAdapter extends RecyclerView.Adapter<GoodAdapter.GoodViewHolder
         private TextView numAvailable;
         private TextView numHave;
 
-        public GoodViewHolder(@NonNull View itemView) {
+        GoodViewHolder(@NonNull View itemView) {
             super(itemView);
             buyButton = itemView.findViewById(R.id.buy_button);
             item = itemView.findViewById(R.id.item_name);

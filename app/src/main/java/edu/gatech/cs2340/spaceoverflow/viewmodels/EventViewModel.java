@@ -10,12 +10,25 @@ import java.util.Random;
 import edu.gatech.cs2340.spaceoverflow.model.TradeGood;
 import edu.gatech.cs2340.spaceoverflow.model.Universe;
 
+/**
+ * Travel event ViewModel
+ */
 public class EventViewModel extends AndroidViewModel {
 
+    /**
+     * ViewModel constructor
+     *
+     * @param application application
+     */
     public EventViewModel(@NonNull Application application) {
         super(application);
     }
 
+    /**
+     * Generates a random event (or lack thereof)
+     *
+     * @return String representation of event
+     */
     public String generateEvent() {
         Random random = new Random();
 

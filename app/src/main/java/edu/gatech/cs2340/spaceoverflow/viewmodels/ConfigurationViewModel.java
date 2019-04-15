@@ -8,14 +8,28 @@ import android.util.Log;
 import edu.gatech.cs2340.spaceoverflow.model.Player;
 import edu.gatech.cs2340.spaceoverflow.model.Universe;
 
+/**
+ * Config ViewModel
+ */
 public class ConfigurationViewModel extends AndroidViewModel {
 
     private final int TOTAL_SKILL = 16;
 
+    /**
+     * ViewModel constructor
+     *
+     * @param application Application
+     */
     public ConfigurationViewModel(@NonNull Application application) {
         super(application);
     }
 
+    /**
+     * Validates skill levels
+     *
+     * @param player player
+     * @return true if valid
+     */
     public boolean validateSkillLevels(Player player) {
         if (player.getPilotSkill() < 0) {
             return false;
@@ -36,6 +50,12 @@ public class ConfigurationViewModel extends AndroidViewModel {
                 == TOTAL_SKILL;
     }
 
+    /**
+     * Number of unallocated skill points
+     *
+     * @param player player
+     * @return number of unallocated points
+     */
     public Integer skillsRemaining(Player player) {
         return 16 - (player.getPilotSkill()
                     + player.getFighterSkill()
@@ -43,6 +63,11 @@ public class ConfigurationViewModel extends AndroidViewModel {
                     + player.getEngineerSkill());
     }
 
+    /**
+     * Initializes the Universe
+     *
+     * @param player player to initialize with
+     */
     public void createUniverse(Player player) {
         //largeLog("ConfigurationViewModel", Universe.getInstance().toString());
 
@@ -58,15 +83,6 @@ public class ConfigurationViewModel extends AndroidViewModel {
 //        }
 
         Log.i("ConfigurationViewModel", "The player was created with 1000 credits and a Gnat spaceship. " + player.toString());
-    }
-
-    public static void largeLog(String tag, String content) {
-        if (content.length() > 4000) {
-            Log.i(tag, " \n" + content.substring(0, 4000 - 61));
-            largeLog(tag, " \n" + content.substring(4000 - 61));
-        } else {
-            Log.i(tag, " \n" + content);
-        }
     }
 
 }

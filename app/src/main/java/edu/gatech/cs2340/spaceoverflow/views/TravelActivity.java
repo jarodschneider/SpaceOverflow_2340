@@ -16,6 +16,9 @@ import edu.gatech.cs2340.spaceoverflow.R;
 import edu.gatech.cs2340.spaceoverflow.model.SolarSystem;
 import edu.gatech.cs2340.spaceoverflow.model.Universe;
 
+/**
+ * Travel activity
+ */
 public class TravelActivity extends AppCompatActivity {
 
 
@@ -77,6 +80,11 @@ public class TravelActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Warps to new location
+     *
+     * @param view current View
+     */
     public void onWarp(View view) {
         String nameCurrent = solarArray[solarSystems.getSelectedItemPosition()];
 

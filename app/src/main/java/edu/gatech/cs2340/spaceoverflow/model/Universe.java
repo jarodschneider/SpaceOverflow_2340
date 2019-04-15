@@ -2,7 +2,6 @@ package edu.gatech.cs2340.spaceoverflow.model;
 
 import android.util.Log;
 
-import com.google.firebase.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -10,9 +9,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Universe class
+ */
 public class Universe {
 
     private static Universe single_instance;
@@ -77,6 +80,11 @@ public class Universe {
         }
     }
 
+    /**
+     * Gets singleton
+     *
+     * @return instance
+     */
     public static Universe getInstance() {
         if (single_instance == null) {
             single_instance = new Universe(new Player("", 0,
@@ -101,10 +109,20 @@ public class Universe {
 //
 //    }
 
+    /**
+     * Gets list of valid coordinates
+     *
+     * @return coordinates list
+     */
     public List<List<Integer>> getValidCoords() {
-        return validCoords;
+        return Collections.unmodifiableList(validCoords);
     }
 
+    /**
+     * Creates Universe
+     *
+     * @param player player
+     */
     public static void createUniverse(Player player) {
         single_instance = new Universe(player);
 
@@ -127,7 +145,11 @@ public class Universe {
         }
     }
 
-
+    /**
+     * Gets solar systems as list
+     *
+     * @return systems list
+     */
     public List<SolarSystem> getSolarSystemsAsList() {
         List<SolarSystem> list = new ArrayList<>();
         for (List<SolarSystem> arr : solarSystems) {
@@ -136,6 +158,11 @@ public class Universe {
         return list;
     }
 
+    /**
+     * Loads from Firebase
+     *
+     * @return Player
+     */
     public Player loadUniverse() {
         Log.d("DEV", single_instance.player.getName());
         myRef.child("game").child("player").child("name").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -227,14 +254,27 @@ public class Universe {
         return single_instance.player;
     }
 
-
+    /**
+     * Gets list of SolarSystems
+     * @return list of systems
+     */
     public List<List<SolarSystem>> getSolarSystems() {
         return solarSystems;
     }
 
+    /**
+     * Gets player
+     *
+     * @return player
+     */
     public Player getPlayer() {
         return player;
     }
 
-    public String[] getSolarSystemNames() { return SolarSystemNames; }
+    /**
+     * Gets system names
+     *
+     * @return system names
+     */
+    public String[] getSolarSystemNames() { return SolarSystemNames.clone(); }
 }

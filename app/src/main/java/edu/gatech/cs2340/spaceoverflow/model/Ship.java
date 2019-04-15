@@ -3,8 +3,11 @@ package edu.gatech.cs2340.spaceoverflow.model;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Ship class
+ */
 public class Ship {
-    public static final Ship GNAT = new Ship("Gnat", 10, 100);
+    static final Ship GNAT = new Ship("Gnat", 10, 100);
 
     private List<TradeGood> cargoHold;
     private int capacity;
@@ -18,27 +21,38 @@ public class Ship {
         this.fuel = fuel;
     }
 
-    public Ship(Ship ship) {
+    Ship(Ship ship) {
         this(ship.name, ship.capacity, ship.fuel);
     }
 
+    /**
+     * Gets cargo hold
+     *
+     * @return cargoHold
+     */
     public List<TradeGood> getCargoHold() {
         return cargoHold;
     }
 
-    public void setCargoHold(List<TradeGood> cargoHold) {
-        this.cargoHold = cargoHold;
-    }
-
+    /**
+     * Gets remaining capacity
+     *
+     * @return capacity
+     */
     public Integer getCapacity() {
         return capacity;
     }
 
+    /**
+     * Sets remaining capacity
+     *
+     * @param capacity new capacity
+     */
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
-    public boolean addGood(TradeGood tradeGood) {
+    boolean addGood(TradeGood tradeGood) {
         if (capacity > 0) {
             if (cargoHold.contains(tradeGood)) {
                 TradeGood curr = cargoHold.get(cargoHold.indexOf(tradeGood));
@@ -55,7 +69,7 @@ public class Ship {
         }
     }
 
-    public boolean removeGood(TradeGood tradeGood) {
+    boolean removeGood(TradeGood tradeGood) {
         List<TradeGood> market = Universe.getInstance()
                 .getSolarSystems().get(Universe.getInstance().getPlayer().getCoords().get(0))
                 .get(Universe.getInstance().getPlayer().getCoords().get(1))
@@ -73,6 +87,12 @@ public class Ship {
         return true;
     }
 
+    /**
+     * Travels ship to new SolarSystem
+     *
+     * @param planet new system
+     * @return true if successfully traveled
+     */
     public boolean travelTo(SolarSystem planet) {
         int distance = planet.distanceFrom(Universe.getInstance().getPlayer().getCoords());
         if (distance <= fuel) {
@@ -84,14 +104,24 @@ public class Ship {
     }
 
 
+    /**
+     * Gets ship's name
+     *
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
-    public void burnFuel(int burned) {
+    private void burnFuel(int burned) {
         fuel -= burned;
     }
 
+    /**
+     * Gets fuel
+     *
+     * @return fuel
+     */
     public Integer getFuel() {
         return fuel;
     }
