@@ -3,12 +3,15 @@ package edu.gatech.cs2340.spaceoverflow;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import edu.gatech.cs2340.spaceoverflow.model.Player;
 import edu.gatech.cs2340.spaceoverflow.model.Ship;
 import edu.gatech.cs2340.spaceoverflow.model.TradeGood;
 
-import static org.junit.Assert.*;
-import java.util.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit test for to test buyGood()
@@ -34,6 +37,14 @@ public class BuyGoodUnitTest {
     @Test
     public void buyNullTest() {
         assertFalse(tester.buyGood(null));
+    }
+
+    @Test
+    public void buyWithoutCapacityTest() {
+	    tester.getShip().setCapacity(0);
+	    TradeGood water = TradeGood.WATER;
+	    water.setQuantity(1);
+	    assertFalse(tester.buyGood(water));
     }
 
     @Test
