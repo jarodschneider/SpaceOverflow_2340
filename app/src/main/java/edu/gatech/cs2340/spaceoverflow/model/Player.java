@@ -1,5 +1,7 @@
 package edu.gatech.cs2340.spaceoverflow.model;
 
+import android.util.Log;
+
 import java.util.List;
 
 public class Player {
@@ -28,10 +30,14 @@ public class Player {
     }
 
     public boolean buyGood(TradeGood tradeGood) {
+        if (tradeGood == null) {
+            return false;
+        }
+
         if (tradeGood.getPrice() <= credits && tradeGood.getQuantity() > 0) {
             if (ship.addGood(tradeGood)) {
                 credits -= tradeGood.getPrice();
-                tradeGood.setQuantity(tradeGood.getQuantity() - 1);
+//                tradeGood.setQuantity(tradeGood.getQuantity() - 1);
                 return true;
             } else {
                 return false;
